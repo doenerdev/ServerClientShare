@@ -7,7 +7,7 @@ using ServerClientShare.Enums;
 
 namespace ServerClientShare.DTO
 {
-    public class HexCellDTO
+    public class HexCellDTO : DTO
     {
         public HexCellType HexCellType { get; set; }
         public HexCoordinatesDTO Coordinates { get; set; }

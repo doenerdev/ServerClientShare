@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServerClientShare.DTO
 {
-    public class HexMapDTO
+    public class HexMapDTO : DTO
     {
         public int Width = 10;
         public int Height = 10;

@@ -9,6 +9,7 @@
     <Import_RootNamespace>ServerClientShare</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)DTO\DTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\HexCoordinatesDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\MatchDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\PlayerDTO.cs" />
@@ -22,6 +23,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)DTO\HexCellDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\HexMapDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\HexUnitDTO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IJSONSerializable.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MiniJson\MiniJson.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Helper\" />

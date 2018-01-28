@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace ServerClientShare.DTO
 {
-    public class MatchDTO
+    public class MatchDTO : DTO
     {
         public List<PlayerDTO> Players { get; private set; }
         public string GameId { get; set; }

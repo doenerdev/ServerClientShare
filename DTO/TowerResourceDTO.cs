@@ -5,7 +5,7 @@ using ServerClientShare.Enums;
 
 namespace ServerClientShare.DTO
 {
-    public class TowerResourceDTO
+    public class TowerResourceDTO : DTO
     {
         public ResourceType Type { get; set; }
 

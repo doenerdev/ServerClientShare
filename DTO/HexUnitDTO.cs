@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +7,7 @@ using ServerClientShare.Enums;
 
 namespace ServerClientShare.DTO
 {
-    public class HexUnitDTO
+    public class HexUnitDTO : DTO
     {
         public int PlayerId { get; set; }
         public HexCoordinatesDTO Coordinates { get; set; }
