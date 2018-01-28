@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ServerGameCode;
 
 namespace ServerClientShare.DTO
 {
@@ -19,27 +18,28 @@ namespace ServerClientShare.DTO
             CurrentPlayerIndex = 0;
         }
 
-        public void AddPlayer(Player player)
+        public void AddPlayer(string playerName)
         {
+            if (Players.Count(pd => pd.PlayerName == playerName) > 0) return;
+
             var playerDto = new PlayerDTO()
             {
                 PlayerIndex = Players.Count(),
-                PlayerName = player.ConnectUserId
+                PlayerName = playerName
             };
-            AddPlayer(playerDto);
+            Players.Add(playerDto);
         }
 
         public void AddPlayer(PlayerDTO playerDto)
         {
-            if (Players.Count(pd => pd.PlayerName == playerDto.PlayerName) <= 0)
-            {
-                Players.Add(playerDto);
-            }
+            if (Players.Count(pd => pd.PlayerName == playerDto.PlayerName) > 0) return;
+
+            Players.Add(playerDto);
         }
 
-        public void RemovePlayer(Player player)
+        public void RemovePlayer(string playerName)
         {
-            Players.RemoveAll(pd => pd.PlayerName == player.ConnectUserId);
+            Players.RemoveAll(pd => pd.PlayerName == playerName);
         }
 
         public void RemovePlayer(PlayerDTO playerDto)
