@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PlayerIO.GameLibrary;
 using ServerClientShare.Enums;
 
 namespace ServerClientShare.DTO
 {
-    public class HexCellDTO : DTO
+    [Serializable]
+    public class HexCellDTO : DTO<HexCellDTO>
     {
         public HexCellType HexCellType { get; set; }
-        public HexCoordinatesDTO Coordinates { get; set; }
         public TowerResourceDTO Resource { get; set; }
         public List<HexUnitDTO> Units { get; set; }
 
@@ -23,6 +24,47 @@ namespace ServerClientShare.DTO
         {
             Resource = resource;
             Units = units;
+        }
+
+        public override object[] ToMessageArguments(ref object[] args)
+        {
+            var newArgs = new object[]
+            {
+                (int) HexCellType,
+                Resource != null ? (int)Resource.Type : (int)ResourceType.None,
+            };
+
+            return args.Concat(newArgs).ToArray();
+        }
+
+        public Message ToMessage(Message message)
+        {
+            message.Add((int)HexCellType);
+            message.Add(Resource != null ? (int)Resource.Type : (int)ResourceType.None);
+
+            return message;
+        }
+
+        public static HexCellDTO FromMessageArguments(Message message, ref uint offset)
+        {
+            HexCellDTO dto = new HexCellDTO()
+            {
+                HexCellType = (HexCellType)message.GetInt(offset++),
+                Resource = (ResourceType)message.GetInt(offset++) != ResourceType.None
+                    ? new TowerResourceDTO((ResourceType)message.GetInt(offset-1)) : null
+            };
+            return dto;
+        }
+
+        public new static HexCellDTO FromMessage(Message message)
+        {
+            HexCellDTO dto = new HexCellDTO()
+            {
+                HexCellType = (HexCellType) message.GetInt(0),
+                Resource = (ResourceType) message.GetInt(1) != ResourceType.None
+                    ? new TowerResourceDTO((ResourceType)message.GetInt(1)) : null
+            };
+            return dto;
         }
     }
 }

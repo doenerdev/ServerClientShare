@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PlayerIO.GameLibrary;
+using ServerClientShare.Enums;
 
 namespace ServerClientShare.Interfaces
 {
-    public interface IJsonSerializable
+    public interface IMessageSerializable<T>
     {
-        string ToJson();
+        object[] ToMessageArguments(ref object[] args);
     }
 }

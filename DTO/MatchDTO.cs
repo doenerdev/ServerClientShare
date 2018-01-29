@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ServerClientShare.DTO
 {
-    public class MatchDTO : DTO
+    public class MatchDTO : DTO<MatchDTO>
     {
         public List<PlayerDTO> Players { get; private set; }
         public string GameId { get; set; }
@@ -44,6 +44,11 @@ namespace ServerClientShare.DTO
         public void RemovePlayer(PlayerDTO playerDto)
         {
             Players.Remove(playerDto);
+        }
+
+        public override object[] ToMessageArguments(ref object[] args)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

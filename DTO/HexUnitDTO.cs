@@ -7,11 +7,16 @@ using ServerClientShare.Enums;
 
 namespace ServerClientShare.DTO
 {
-    public class HexUnitDTO : DTO
+    public class HexUnitDTO : DTO<HexUnitDTO>
     {
         public int PlayerId { get; set; }
         public HexCoordinatesDTO Coordinates { get; set; }
         public HexUnitType Type { get; set; }
         public int Stamina { get; set; }
+
+        public override object[] ToMessageArguments(ref object[] args)
+        {
+            return null;
+        }
     }
 }

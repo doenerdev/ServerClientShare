@@ -6,6 +6,7 @@ namespace ServerClientShare.Enums
 {
     public enum ResourceType
     {
+        None,
         Wood,
         Stone,
         Glass

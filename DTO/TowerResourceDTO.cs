@@ -5,13 +5,18 @@ using ServerClientShare.Enums;
 
 namespace ServerClientShare.DTO
 {
-    public class TowerResourceDTO : DTO
+    public class TowerResourceDTO : DTO<TowerResourceDTO>
     {
         public ResourceType Type { get; set; }
 
         public TowerResourceDTO(ResourceType type)
         {
             Type = type;
+        }
+
+        public override object[] ToMessageArguments(ref object[] args)
+        {
+            return null;
         }
     }
 }
