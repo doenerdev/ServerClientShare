@@ -8,6 +8,7 @@ namespace ServerClientShare.Enums
     {
         ServerGameIsInitializing,
         ServerGameInitialized,
-        RequestHexMap
+        RequestHexMap,
+        ServerSentHexMap,
     }
 }
