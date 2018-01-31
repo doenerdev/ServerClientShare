@@ -7,6 +7,7 @@ namespace ServerClientShare.Enums
     public enum NetworkMessageType
     {
         ServerGameIsInitializing,
-        ServerGameInitialized
+        ServerGameInitialized,
+        RequestHexMap
     }
 }
