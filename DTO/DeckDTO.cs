@@ -42,7 +42,7 @@ namespace ServerClientShare.DTO
             DeckDTO dto = new DeckDTO();
             dto.DeckSize = message.GetInt(offset++);
 
-            while (offset < dto.DeckSize)
+            while (offset <= dto.DeckSize)
             {
                 dto.Cards.Add((CardType) message.GetInt(offset++));
             }
