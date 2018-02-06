@@ -18,8 +18,8 @@ namespace ServerClientShare.DTO
     [Serializable]
     public class HexMapDTO : DTO<HexMapDTO>
     {
-        public int Width = 10;
-        public int Height = 10;
+        public int Width { get; set; }
+        public int Height {get; set;}
         public List<HexCellDTO> Cells { get; set; }
 
         public HexMapDTO(HexMapSize size)
@@ -28,8 +28,8 @@ namespace ServerClientShare.DTO
             switch (size)
             {
                 default:
-                    Width = 10;
-                    Height = 10;
+                    Width = 1;
+                    Height = 2;
                     break;
             }
         }
@@ -63,11 +63,9 @@ namespace ServerClientShare.DTO
 
         public static HexMapDTO FromMessageArguments(Message message, ref uint offset)
         {
-            HexMapDTO dto = new HexMapDTO(HexMapSize.L)
-            {
-                Width = message.GetInt(offset++),
-                Height = message.GetInt(offset++),
-            };
+            HexMapDTO dto = new HexMapDTO(HexMapSize.L);
+            dto.Width = message.GetInt(offset++);
+            dto.Height = message.GetInt(offset++);
 
             while (offset < message.Count)
             {
