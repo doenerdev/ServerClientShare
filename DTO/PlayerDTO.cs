@@ -15,13 +15,13 @@ namespace ServerClientShare.DTO
     {
         public int PlayerIndex { get; set; }
         public string PlayerName { get; set; }
-        public PlayerType PlayerType { get; set; }
+        public ControlMode ControlMode { get; set; }
 
         public override Message ToMessage(Message message)
         {
             message.Add(PlayerIndex);
             message.Add(PlayerName);
-            message.Add((int) PlayerType);
+            message.Add((int) ControlMode);
             return message;
         }
 
@@ -30,7 +30,7 @@ namespace ServerClientShare.DTO
             PlayerDTO dto = new PlayerDTO();
             dto.PlayerIndex = message.GetInt(offset++);
             dto.PlayerName = message.GetString(offset++);
-            dto.PlayerType = (PlayerType) message.GetInt(offset++);
+            dto.ControlMode = (ControlMode) message.GetInt(offset++);
             return dto;
         }
     }

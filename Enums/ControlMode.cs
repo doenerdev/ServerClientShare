@@ -4,10 +4,10 @@ using System.Text;
 
 namespace ServerClientShare.Enums
 {
-    public enum PlayerType
+    public enum ControlMode
     {
-        Remote,
         Local,
-        AI
+        AI,
+        Remote,
     }
 }
