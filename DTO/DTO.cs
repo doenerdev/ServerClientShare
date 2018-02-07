@@ -18,14 +18,13 @@ using ServerClientShare.Interfaces;
 
 namespace ServerClientShare.DTO
 {
-    [Serializable]
     public abstract class DTO<T> : IMessageSerializable<T>
     {
-        public abstract object[] ToMessageArguments(ref object[] args);
-
-        public static T FromMessage(Message message)
+        public static T FromMessageArguments(Message message, ref uint offset)
         {
             return default(T);
         }
+
+        public abstract Message ToMessage(Message message);
     }
 }

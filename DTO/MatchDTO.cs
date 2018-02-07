@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PlayerIO.GameLibrary;
+using ServerClientShare.Enums;
 
 namespace ServerClientShare.DTO
 {
@@ -17,14 +19,15 @@ namespace ServerClientShare.DTO
             CurrentPlayerIndex = 0;
         }
 
-        public void AddPlayer(string playerName)
+        public void AddPlayer(string playerName, PlayerType type = PlayerType.Remote)
         {
             if (Players.Count(pd => pd.PlayerName == playerName) > 0) return;
 
             var playerDto = new PlayerDTO()
             {
                 PlayerIndex = Players.Count(),
-                PlayerName = playerName
+                PlayerName = playerName,
+                PlayerType =  type,
             };
             Players.Add(playerDto);
         }
@@ -46,9 +49,32 @@ namespace ServerClientShare.DTO
             Players.Remove(playerDto);
         }
 
-        public override object[] ToMessageArguments(ref object[] args)
+        public override Message ToMessage(Message message)
         {
-            throw new System.NotImplementedException();
+            message.Add(GameId);
+            message.Add(CurrentPlayerIndex);
+            message.Add(Players.Count);
+
+            foreach (var player in Players)
+            {
+                message = player.ToMessage(message);
+            }
+
+            return message;
+        }
+
+        public new static MatchDTO FromMessageArguments(Message message, ref uint offset)
+        {
+            MatchDTO dto = new MatchDTO();
+            dto.GameId = message.GetString(offset++);
+            dto.CurrentPlayerIndex = message.GetInt(offset++);
+
+            for (int i = 0; i < message.GetInt(offset++); i++)
+            {
+                dto.Players.Add(PlayerDTO.FromMessageArguments(message, ref offset));
+            }
+
+            return dto;
         }
     }
 }

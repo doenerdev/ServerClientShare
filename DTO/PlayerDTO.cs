@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
+using PlayerIO.GameLibrary;
+using ServerClientShare.Enums;
 
 namespace ServerClientShare.DTO
 {
@@ -8,10 +11,23 @@ namespace ServerClientShare.DTO
     {
         public int PlayerIndex { get; set; }
         public string PlayerName { get; set; }
+        public PlayerType PlayerType { get; set; }
 
-        public override object[] ToMessageArguments(ref object[] args)
+        public override Message ToMessage(Message message)
         {
-            throw new NotImplementedException();
+            message.Add(PlayerIndex);
+            message.Add(PlayerName);
+            message.Add((int) PlayerType);
+            return message;
+        }
+
+        public new static PlayerDTO FromMessageArguments(Message message, ref uint offset)
+        {
+            PlayerDTO dto = new PlayerDTO();
+            dto.PlayerIndex = message.GetInt(offset++);
+            dto.PlayerName = message.GetString(offset++);
+            dto.PlayerType = (PlayerType) message.GetInt(offset++);
+            return dto;
         }
     }
 }

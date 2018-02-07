@@ -13,38 +13,33 @@ namespace ServerClientShare.DTO
     public class DeckDTO : DTO<DeckDTO>
     {
         public int DeckSize { get; set; }
-        public List<CardType> Cards { get; set; }
+        public List<CardDTO> Cards { get; set; }
 
         public DeckDTO()
         {
-            Cards = new List<CardType>();
+            Cards = new List<CardDTO>();
         }
 
-        public override object[] ToMessageArguments(ref object[] args)
-        {
-           return new object[0];
-        }
-
-        public Message ToMessage(Message message)
+        public override Message ToMessage(Message message)
         {
             message.Add(DeckSize);
 
             foreach (var card in Cards)
             {
-                message.Add((int) card);
+                message = card.ToMessage(message);
             }
 
             return message;
         }
 
-        public static DeckDTO FromMessageArguments(Message message, ref uint offset)
+        public new static DeckDTO FromMessageArguments(Message message, ref uint offset)
         {
             DeckDTO dto = new DeckDTO();
             dto.DeckSize = message.GetInt(offset++);
 
             while (offset <= dto.DeckSize)
             {
-                dto.Cards.Add((CardType) message.GetInt(offset++));
+                dto.Cards.Add(CardDTO.FromMessageArguments(message, ref offset));
             }
 
             return dto;

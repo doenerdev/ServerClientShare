@@ -30,18 +30,7 @@ namespace ServerClientShare.DTO
             Units = units;
         }
 
-        public override object[] ToMessageArguments(ref object[] args)
-        {
-            var newArgs = new object[]
-            {
-                (int) HexCellType,
-                Resource != null ? (int)Resource.Type : (int)ResourceType.None,
-            };
-
-            return args.Concat(newArgs).ToArray();
-        }
-
-        public Message ToMessage(Message message)
+        public override Message ToMessage(Message message)
         {
             message.Add((int)HexCellType);
             message.Add(Resource != null ? (int)Resource.Type : (int)ResourceType.None);
@@ -49,24 +38,13 @@ namespace ServerClientShare.DTO
             return message;
         }
 
-        public static HexCellDTO FromMessageArguments(Message message, ref uint offset)
+        public new static HexCellDTO FromMessageArguments(Message message, ref uint offset)
         {
             HexCellDTO dto = new HexCellDTO()
             {
                 HexCellType = (HexCellType)message.GetInt(offset++),
                 Resource = (ResourceType)message.GetInt(offset++) != ResourceType.None
                     ? new TowerResourceDTO((ResourceType)message.GetInt(offset-1)) : null
-            };
-            return dto;
-        }
-
-        public new static HexCellDTO FromMessage(Message message)
-        {
-            HexCellDTO dto = new HexCellDTO()
-            {
-                HexCellType = (HexCellType) message.GetInt(0),
-                Resource = (ResourceType) message.GetInt(1) != ResourceType.None
-                    ? new TowerResourceDTO((ResourceType)message.GetInt(1)) : null
             };
             return dto;
         }

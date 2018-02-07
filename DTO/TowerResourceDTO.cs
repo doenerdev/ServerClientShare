@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using PlayerIO.GameLibrary;
 using ServerClientShare.Enums;
 
 namespace ServerClientShare.DTO
@@ -14,9 +15,16 @@ namespace ServerClientShare.DTO
             Type = type;
         }
 
-        public override object[] ToMessageArguments(ref object[] args)
+        public override Message ToMessage(Message message)
         {
-            return null;
+            message.Add((int) Type);
+            return message;
+        }
+
+        public new static TowerResourceDTO FromMessageArguments(Message message, ref uint offset)
+        {
+            TowerResourceDTO dto = new TowerResourceDTO((ResourceType) message.GetInt(offset++));
+            return dto;
         }
     }
 }

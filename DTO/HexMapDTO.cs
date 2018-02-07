@@ -34,21 +34,7 @@ namespace ServerClientShare.DTO
             }
         }
 
-        public override object[] ToMessageArguments(ref object[] args)
-        {
-            List<object> argsList = new List<object>();
-            argsList.Add(Width);
-            argsList.Add(Height);
-
-            foreach (var cell in Cells)
-            {
-                argsList.Add(cell.ToMessageArguments(ref args));
-            }
-
-            return args.Concat(argsList.ToArray()).ToArray();
-        }
-
-        public Message ToMessage(Message message)
+        public override Message ToMessage(Message message)
         {
             message.Add(Width);
             message.Add(Height);
@@ -61,7 +47,7 @@ namespace ServerClientShare.DTO
             return message;
         }
 
-        public static HexMapDTO FromMessageArguments(Message message, ref uint offset)
+        public new static HexMapDTO FromMessageArguments(Message message, ref uint offset)
         {
             HexMapDTO dto = new HexMapDTO(HexMapSize.L);
             dto.Width = message.GetInt(offset++);
@@ -72,7 +58,6 @@ namespace ServerClientShare.DTO
                 dto.Cells.Add(HexCellDTO.FromMessageArguments(message, ref offset));
             }
             
-
             return dto;
         }
     }
