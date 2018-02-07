@@ -38,7 +38,7 @@ namespace ServerClientShare.DTO
             dto.PlayerId = message.GetInt(offset++);
             dto.Type = (HexUnitType) message.GetInt(offset++);
             dto.Stamina = message.GetInt(offset++);
-            dto.Coordinates = HexCoordinatesDTO.FromMessageArguments(message, offset);
+            dto.Coordinates = HexCoordinatesDTO.FromMessageArguments(message, ref offset);
             return dto;
         }
     }
