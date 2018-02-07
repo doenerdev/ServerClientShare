@@ -17,6 +17,7 @@ namespace ServerClientShare.Enums
 
         ServerSentHexMap,
         ServerSentDeck,
-        ServerSentMarketplace
+        ServerSentMarketplace,
+        ServerSentReady
     }
 }
