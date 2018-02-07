@@ -9,6 +9,7 @@
     <Import_RootNamespace>ServerClientShare</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)DTO\CardDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\DeckDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\DTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\HexCoordinatesDTO.cs" />
@@ -21,6 +22,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Enums\HexMapSize.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\HexUnitType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\NetworkMessageType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\ControlMode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\ResourceType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\HexCellDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\HexMapDTO.cs" />

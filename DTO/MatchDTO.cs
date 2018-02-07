@@ -72,8 +72,9 @@ namespace ServerClientShare.DTO
             MatchDTO dto = new MatchDTO();
             dto.GameId = message.GetString(offset++);
             dto.CurrentPlayerIndex = message.GetInt(offset++);
+            var qtyPlayers = message.GetInt(offset++);
 
-            for (int i = 0; i < message.GetInt(offset++); i++)
+            for (int i = 0; i < qtyPlayers; i++)
             {
                 dto.Players.Add(PlayerDTO.FromMessageArguments(message, ref offset));
             }
