@@ -14,10 +14,13 @@ namespace ServerClientShare.Enums
         RequestDeck,
         RequestMarketplace,
 
+        GameActionPerformed,
+
 
         ServerSentHexMap,
         ServerSentDeck,
         ServerSentMarketplace,
-        ServerSentReady
+        ServerSentReady,
+        ServerSentGameAction
     }
 }
