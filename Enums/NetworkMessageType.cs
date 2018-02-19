@@ -21,6 +21,7 @@ namespace ServerClientShare.Enums
         ServerSentDeck,
         ServerSentMarketplace,
         ServerSentReady,
-        ServerSentGameAction
+        ServerSentGameAction,
+        ServerSentChangeTurn,
     }
 }
