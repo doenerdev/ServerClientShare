@@ -16,7 +16,7 @@ namespace ServerClientShare.Services
 
         private DeckDTO _deck;
         private DeckDTO _marketplace;
-        private RandomGenerator _rndGenerator;
+        private ServerClientShare.Helper.RandomGenerator _rndGenerator;
 
         public DeckDTO Deck
         {
@@ -44,7 +44,7 @@ namespace ServerClientShare.Services
             }
         }
 
-        public DeckService(RandomGenerator rndGenerator)
+        public DeckService(ServerClientShare.Helper.RandomGenerator rndGenerator)
         {
             _rndGenerator = rndGenerator;
         }

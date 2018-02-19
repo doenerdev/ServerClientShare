@@ -11,10 +11,10 @@ namespace ServerClientShare.Services
 {
     public class HexCellService
     {
-        private Die _die;
-        private RandomGenerator _rndGenerator;
+        private ServerClientShare.Helper.Die _die;
+        private ServerClientShare.Helper.RandomGenerator _rndGenerator;
 
-        public HexCellService(Die die, RandomGenerator rndGenerator)
+        public HexCellService(ServerClientShare.Helper.Die die, ServerClientShare.Helper.RandomGenerator rndGenerator)
         {
             _die = die;
             _rndGenerator = rndGenerator;
