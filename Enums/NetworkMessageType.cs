@@ -15,7 +15,7 @@ namespace ServerClientShare.Enums
         RequestMarketplace,
 
         GameActionPerformed,
-
+        ChangeTurnPerformed,
 
         ServerSentHexMap,
         ServerSentDeck,

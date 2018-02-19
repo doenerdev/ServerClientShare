@@ -28,8 +28,8 @@ namespace ServerClientShare.DTO
             switch (size)
             {
                 default:
-                    Width = 1;
-                    Height = 2;
+                    Width = 5;
+                    Height = 5;
                     break;
             }
         }
