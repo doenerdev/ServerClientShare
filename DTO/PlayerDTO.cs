@@ -16,12 +16,14 @@ namespace ServerClientShare.DTO
         public int PlayerIndex { get; set; }
         public string PlayerName { get; set; }
         public ControlMode ControlMode { get; set; }
+        public TowerSegmentDTO CurrentTowerSegment { get; set; }
 
         public override Message ToMessage(Message message)
         {
             message.Add(PlayerIndex);
             message.Add(PlayerName);
             message.Add((int) ControlMode);
+            message = CurrentTowerSegment.ToMessage(message);
             return message;
         }
 
@@ -31,6 +33,7 @@ namespace ServerClientShare.DTO
             dto.PlayerIndex = message.GetInt(offset++);
             dto.PlayerName = message.GetString(offset++);
             dto.ControlMode = (ControlMode) message.GetInt(offset++);
+            dto.CurrentTowerSegment = TowerSegmentDTO.FromMessageArguments(message, ref offset);
             return dto;
         }
     }

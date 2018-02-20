@@ -22,6 +22,8 @@ public class TowerSegmentDTO : DTO<TowerSegmentDTO>
 
     public override Message ToMessage(Message message)
     {
+        message.Add(RequiredResources.Count);
+
         foreach (var resource in RequiredResources)
         {
             message = resource.ToMessage(message);
@@ -33,8 +35,9 @@ public class TowerSegmentDTO : DTO<TowerSegmentDTO>
     public new static TowerSegmentDTO FromMessageArguments(Message message, ref uint offset)
     {
         TowerSegmentDTO dto = new TowerSegmentDTO();
+        var qtyRequiredResources = message.GetInt(offset++);
 
-        while (offset < message.Count)
+        while (offset < qtyRequiredResources)
         {
             dto.RequiredResources.Add(TowerResourceDTO.FromMessageArguments(message, ref offset));
         }
