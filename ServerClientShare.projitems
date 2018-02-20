@@ -27,9 +27,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)DTO\HexCellDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\HexMapDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\HexUnitDTO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\Die.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\RandomGenerator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\SimpleSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IMessageSerializable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MiniJson\MiniJson.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\DeckService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\HexCellService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\HexMapService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />

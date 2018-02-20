@@ -13,6 +13,7 @@ namespace ServerClientShare.Enums
         RequestHexMap,
         RequestDeck,
         RequestMarketplace,
+        RequestNewTowerSegment,
 
         GameActionPerformed,
         ChangeTurnPerformed,
@@ -23,5 +24,6 @@ namespace ServerClientShare.Enums
         ServerSentReady,
         ServerSentGameAction,
         ServerSentChangeTurn,
+        ServerSentNewTowerSegment,
     }
 }

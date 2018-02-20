@@ -24,6 +24,7 @@ namespace ServerClientShare.Helper
         {
             return _rnd.NextDouble() * (end - start) + start;
         }
+
     }
 
 }
