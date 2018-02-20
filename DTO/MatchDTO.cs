@@ -23,7 +23,7 @@ namespace ServerClientShare.DTO
             CurrentPlayerIndex = 0;
         }
 
-        public void AddPlayer(string playerName, ControlMode type = ControlMode.Remote)
+        /*public void AddPlayer(string playerName, ControlMode type = ControlMode.Remote)
         {
             if (Players.Count(pd => pd.PlayerName == playerName) > 0) return;
 
@@ -34,7 +34,7 @@ namespace ServerClientShare.DTO
                 ControlMode =  type,
             };
             Players.Add(playerDto);
-        }
+        }*/
 
         public void AddPlayer(PlayerDTO playerDto)
         {
