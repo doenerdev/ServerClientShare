@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,11 @@ using PlayerIOClient;
 using PlayerIO.GameLibrary;
 #endif
 using ServerClientShare.Enums;
+using ServerClientShare.Interfaces;
 
 namespace ServerClientShare.DTO
 {
-    public class HexUnitDTO : DTO<HexUnitDTO>
+    public class HexUnitDTO : DatabaseDTO<HexUnitDTO>
     {
         public int PlayerId { get; set; }
         public HexCoordinatesDTO Coordinates { get; set; }
@@ -39,6 +41,31 @@ namespace ServerClientShare.DTO
             dto.Type = (HexUnitType) message.GetInt(offset++);
             dto.Stamina = message.GetInt(offset++);
             dto.Coordinates = HexCoordinatesDTO.FromMessageArguments(message, ref offset);
+            return dto;
+        }
+
+        public override DatabaseObject ToDBObject()
+        {
+            DatabaseObject dbObject = new DatabaseObject();
+            dbObject.Set("PlayerId", PlayerId);
+            dbObject.Set("Coordinates", Coordinates.ToDBObject());
+            dbObject.Set("Type", (int) Type);
+            dbObject.Set("Stamina", Stamina);
+            dbObject.Set("Id", Id);
+
+            return dbObject;
+        }
+
+        public new static HexUnitDTO FromDBObject(DatabaseObject dbObject)
+        {
+            if (dbObject.Count == 0) return null;
+
+            HexUnitDTO dto = new HexUnitDTO();
+            dto.PlayerId = dbObject.GetInt("PlayerId");
+            dto.Type = (HexUnitType) dbObject.GetInt("Type");
+            dto.Stamina = dbObject.GetInt("Stamina");
+            dto.Id = dbObject.GetString("Id");
+
             return dto;
         }
     }

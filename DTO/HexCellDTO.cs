@@ -9,11 +9,13 @@ using PlayerIOClient;
 using PlayerIO.GameLibrary;
 #endif
 using ServerClientShare.Enums;
+using ServerClientShare.Interfaces;
+using ServerGameCode;
 
 namespace ServerClientShare.DTO
 {
     [Serializable]
-    public class HexCellDTO : DTO<HexCellDTO>
+    public class HexCellDTO : DatabaseDTO<HexCellDTO>
     {
         public HexCellType HexCellType { get; set; }
         public TowerResourceDTO Resource { get; set; }
@@ -46,6 +48,43 @@ namespace ServerClientShare.DTO
                 Resource = (ResourceType)message.GetInt(offset++) != ResourceType.None
                     ? new TowerResourceDTO((ResourceType)message.GetInt(offset-1)) : null
             };
+            return dto;
+        }
+
+        public override DatabaseObject ToDBObject()
+        {
+            DatabaseObject dbObject = new DatabaseObject();
+            dbObject.Set("HexCellType", (int) HexCellType);
+            dbObject.Set("Resource", Resource != null ? Resource.ToDBObject() : new DatabaseObject());
+
+            DatabaseArray unitsDB = new DatabaseArray();
+            if (Units != null)
+            {
+                foreach (var unit in Units)
+                {
+                    unitsDB.Add(unit.ToDBObject());
+                }
+            }
+            dbObject.Set("Units", unitsDB);
+
+            return dbObject;
+        }
+
+        public new static HexCellDTO FromDBObject(DatabaseObject dbObject)
+        {
+            if (dbObject.Count == 0) return null;
+
+            HexCellDTO dto = new HexCellDTO();
+            dto.HexCellType = (HexCellType) dbObject.GetInt("HexCellType");
+            dto.Resource = TowerResourceDTO.FromDBObject((DatabaseObject) dbObject.GetObject("Resource"));
+            Console.WriteLine("Resource:" + dbObject.GetObject("Resource"));
+
+            var unitsDB = dbObject.GetArray("Units");
+            for (int i = 0; i < unitsDB.Count; i++)
+            {
+                dto.Units.Add(HexUnitDTO.FromDBObject((DatabaseObject)unitsDB[i]));
+            }
+
             return dto;
         }
     }

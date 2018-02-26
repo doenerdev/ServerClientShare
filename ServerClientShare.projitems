@@ -10,12 +10,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)DTO\CardDTO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DTO\DatabaseDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\DeckDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\DTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\HexCoordinatesDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\MatchDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\PlayerDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\TowerResourceDTO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DTO\TowerSegmentDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\CardType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\GameType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\HexCellType.cs" />
@@ -30,11 +32,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helper\Die.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\RandomGenerator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\SimpleSerializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IDBSerializable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IMessageSerializable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MiniJson\MiniJson.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DeckService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\HexCellService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\HexMapService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\PlayerService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ResourceService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />

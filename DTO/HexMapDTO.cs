@@ -12,11 +12,14 @@ using PlayerIO.GameLibrary;
 #endif
 using ServerClientShare.Enums;
 using ServerClientShare.Helper;
+using ServerClientShare.Interfaces;
+using ServerClientShare.Services;
+using ServerGameCode;
 
 namespace ServerClientShare.DTO
 {
     [Serializable]
-    public class HexMapDTO : DTO<HexMapDTO>
+    public class HexMapDTO : DatabaseDTO<HexMapDTO>
     {
         public int Width { get; set; }
         public int Height {get; set;}
@@ -58,6 +61,43 @@ namespace ServerClientShare.DTO
                 dto.Cells.Add(HexCellDTO.FromMessageArguments(message, ref offset));
             }
             
+            return dto;
+        }
+
+        public override DatabaseObject ToDBObject()
+        {
+            DatabaseObject dbObject = new DatabaseObject();
+            dbObject.Set("Width", Width);
+            dbObject.Set("Height", Height);
+
+            DatabaseArray cellsDB = new DatabaseArray();
+            if (Cells != null)
+            {
+                foreach (var cell in Cells)
+                {
+                    cellsDB.Add(cell.ToDBObject());
+                }
+            }
+            dbObject.Set("Cells", cellsDB);
+
+            return dbObject;
+        }
+
+        public new static HexMapDTO FromDBObject(DatabaseObject dbObject)
+        {
+            if (dbObject.Count == 0) return null;
+
+            HexMapDTO dto = new HexMapDTO(HexMapSize.M);
+            dto.Width = dbObject.GetInt("Width");
+            dto.Height = dbObject.GetInt("Height");
+            var cellsDB = dbObject.GetArray("Cells");
+
+            for (int i = 0; i < cellsDB.Count; i++)
+            {
+                dto.Cells.Add(HexCellDTO.FromDBObject((DatabaseObject) cellsDB[i]));
+                Console.WriteLine(dto.Cells[i]);
+            }
+
             return dto;
         }
     }

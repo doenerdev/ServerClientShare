@@ -7,10 +7,11 @@ using PlayerIOClient;
 using PlayerIO.GameLibrary;
 #endif
 using ServerClientShare.Enums;
+using ServerClientShare.Interfaces;
 
 namespace ServerClientShare.DTO
 {
-    public class TowerResourceDTO : DTO<TowerResourceDTO>
+    public class TowerResourceDTO : DatabaseDTO<TowerResourceDTO>
     {
         public ResourceType Type { get; set; }
 
@@ -28,6 +29,23 @@ namespace ServerClientShare.DTO
         public new static TowerResourceDTO FromMessageArguments(Message message, ref uint offset)
         {
             TowerResourceDTO dto = new TowerResourceDTO((ResourceType) message.GetInt(offset++));
+            return dto;
+        }
+
+        public override DatabaseObject ToDBObject()
+        {
+            DatabaseObject dbObject = new DatabaseObject();
+            dbObject.Set("Type", (int) Type);
+            return dbObject;
+        }
+
+        public new static TowerResourceDTO FromDBObject(DatabaseObject dbObject)
+        {
+            if (dbObject.Count == 0) return null;
+
+            var type = (ResourceType) dbObject.GetInt("Type");
+            TowerResourceDTO dto = new TowerResourceDTO(type);
+            
             return dto;
         }
     }
