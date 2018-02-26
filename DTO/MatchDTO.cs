@@ -10,7 +10,7 @@ using ServerClientShare.Enums;
 
 namespace ServerClientShare.DTO
 {
-    public class MatchDTO : DTO<MatchDTO>
+    public class MatchDTO : DatabaseDTO<MatchDTO>
     {
         public List<PlayerDTO> Players { get; private set; }
         public string GameId { get; set; }
@@ -22,19 +22,6 @@ namespace ServerClientShare.DTO
             Players = new List<PlayerDTO>();
             CurrentPlayerIndex = 0;
         }
-
-        /*public void AddPlayer(string playerName, ControlMode type = ControlMode.Remote)
-        {
-            if (Players.Count(pd => pd.PlayerName == playerName) > 0) return;
-
-            var playerDto = new PlayerDTO()
-            {
-                PlayerIndex = Players.Count(),
-                PlayerName = playerName,
-                ControlMode =  type,
-            };
-            Players.Add(playerDto);
-        }*/
 
         public void AddPlayer(PlayerDTO playerDto)
         {
@@ -77,6 +64,42 @@ namespace ServerClientShare.DTO
             for (int i = 0; i < qtyPlayers; i++)
             {
                 dto.Players.Add(PlayerDTO.FromMessageArguments(message, ref offset));
+            }
+
+            return dto;
+        }
+
+        public override DatabaseObject ToDBObject()
+        {
+            DatabaseObject dbObject = new DatabaseObject();
+            dbObject.Set("GameId", GameId);
+            dbObject.Set("CurrentPlayerIndex", CurrentPlayerIndex);
+
+            DatabaseArray playersDB = new DatabaseArray();
+            if (Players != null)
+            {
+                foreach (var player in Players)
+                {
+                    playersDB.Add(player.ToDBObject());
+                }
+            }
+            dbObject.Set("Players", playersDB);
+
+            return dbObject;
+        }
+
+        public new static MatchDTO FromDBObject(DatabaseObject dbObject)
+        {
+            if (dbObject.Count == 0) return null;
+
+            MatchDTO dto = new MatchDTO();
+            dto.GameId = dbObject.GetString("GameId");
+            dto.CurrentPlayerIndex = dbObject.GetInt("CurrentPlayerIndex");
+
+            var playersDB = dbObject.GetArray("Players");
+            for (int i = 0; i < playersDB.Count; i++)
+            {
+                dto.Players.Add(PlayerDTO.FromDBObject((DatabaseObject)playersDB[i]));
             }
 
             return dto;

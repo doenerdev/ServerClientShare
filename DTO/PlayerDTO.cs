@@ -11,7 +11,7 @@ using ServerClientShare.Enums;
 
 namespace ServerClientShare.DTO
 {
-    public class PlayerDTO : DTO<PlayerDTO>
+    public class PlayerDTO : DatabaseDTO<PlayerDTO>
     {
         public int PlayerIndex { get; set; }
         public string PlayerName { get; set; }
@@ -34,6 +34,33 @@ namespace ServerClientShare.DTO
             dto.PlayerName = message.GetString(offset++);
             dto.ControlMode = (ControlMode) message.GetInt(offset++);
             dto.CurrentTowerSegment = TowerSegmentDTO.FromMessageArguments(message, ref offset);
+            return dto;
+        }
+
+        public override DatabaseObject ToDBObject()
+        {
+            DatabaseObject dbObject = new DatabaseObject();
+            dbObject.Set("PlayerIndex", PlayerIndex);
+            dbObject.Set("PlayerName", PlayerName);
+            dbObject.Set("ControlMode", (int) ControlMode);
+            dbObject.Set("CurrentTowerSegment", CurrentTowerSegment != null 
+                ? CurrentTowerSegment.ToDBObject()
+                : new DatabaseObject()
+            );
+
+            return dbObject;
+        }
+
+        public new static PlayerDTO FromDBObject(DatabaseObject dbObject)
+        {
+            if (dbObject.Count == 0) return null;
+
+            PlayerDTO dto = new PlayerDTO();
+            dto.PlayerIndex = dbObject.GetInt("PlayerIndex");
+            dto.PlayerName = dbObject.GetString("PlayerName");
+            dto.ControlMode = (ControlMode) dbObject.GetInt("ControlMode");
+            dto.CurrentTowerSegment = TowerSegmentDTO.FromDBObject(dbObject.GetObject("CurrentTowerSegment"));
+
             return dto;
         }
     }

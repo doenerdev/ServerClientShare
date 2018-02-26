@@ -76,7 +76,6 @@ namespace ServerClientShare.DTO
             HexCellDTO dto = new HexCellDTO();
             dto.HexCellType = (HexCellType) dbObject.GetInt("HexCellType");
             dto.Resource = TowerResourceDTO.FromDBObject((DatabaseObject) dbObject.GetObject("Resource"));
-            Console.WriteLine("Resource:" + dbObject.GetObject("Resource"));
 
             var unitsDB = dbObject.GetArray("Units");
             for (int i = 0; i < unitsDB.Count; i++)

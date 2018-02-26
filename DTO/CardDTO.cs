@@ -10,7 +10,7 @@ using ServerClientShare.Enums;
 
 namespace ServerClientShare.DTO
 {
-    public class CardDTO : DTO<CardDTO>
+    public class CardDTO : DatabaseDTO<CardDTO>
     {
         public CardType CardType { get; set; }
         public string Id { get; set; }
@@ -32,6 +32,24 @@ namespace ServerClientShare.DTO
             CardDTO dto = new CardDTO();
             dto.Id = message.GetString(offset++);
             dto.CardType = (CardType) message.GetInt(offset++);
+            return dto;
+        }
+
+        public override DatabaseObject ToDBObject()
+        {
+            DatabaseObject dbObject = new DatabaseObject();
+            dbObject.Set("CardType", (int) CardType);
+            dbObject.Set("Id", Id);
+            return dbObject;
+        }
+
+        public new static CardDTO FromDBObject(DatabaseObject dbObject)
+        {
+            if (dbObject.Count == 0) return null;
+
+            CardDTO dto = new CardDTO();
+            dto.CardType = (CardType) dbObject.GetInt("CardType");
+            dto.Id = dbObject.GetString("Id");
             return dto;
         }
     }

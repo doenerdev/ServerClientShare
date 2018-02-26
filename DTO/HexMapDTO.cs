@@ -94,7 +94,6 @@ namespace ServerClientShare.DTO
             for (int i = 0; i < cellsDB.Count; i++)
             {
                 dto.Cells.Add(HexCellDTO.FromDBObject((DatabaseObject) cellsDB[i]));
-                Console.WriteLine(dto.Cells[i]);
             }
 
             return dto;

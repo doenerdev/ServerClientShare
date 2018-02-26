@@ -9,7 +9,7 @@ using PlayerIO.GameLibrary;
 using ServerClientShare.DTO;
 
 
-public class TowerSegmentDTO : DTO<TowerSegmentDTO>
+public class TowerSegmentDTO : DatabaseDTO<TowerSegmentDTO>
 {
     public List<TowerResourceDTO> RequiredResources { get; set; }
 
@@ -41,6 +41,36 @@ public class TowerSegmentDTO : DTO<TowerSegmentDTO>
         {
             dto.RequiredResources.Add(TowerResourceDTO.FromMessageArguments(message, ref offset));
         }
+        return dto;
+    }
+
+    public override DatabaseObject ToDBObject()
+    {
+        DatabaseObject dbObject = new DatabaseObject();
+        DatabaseArray resourcesDB = new DatabaseArray();
+        if (RequiredResources != null)
+        {
+            foreach (var resource in RequiredResources)
+            {
+                resourcesDB.Add(resource.ToDBObject());
+            }
+        }
+        dbObject.Set("RequiredResources", resourcesDB);
+
+        return dbObject;
+    }
+
+    public new static TowerSegmentDTO FromDBObject(DatabaseObject dbObject)
+    {
+        if (dbObject.Count == 0) return null;
+
+        TowerSegmentDTO dto = new TowerSegmentDTO();
+        var resourcesDB = dbObject.GetArray("RequiredResources");
+        for (int i = 0; i < resourcesDB.Count; i++)
+        {
+            dto.RequiredResources.Add(TowerResourceDTO.FromDBObject((DatabaseObject)resourcesDB[i]));
+        }
+
         return dto;
     }
 }
