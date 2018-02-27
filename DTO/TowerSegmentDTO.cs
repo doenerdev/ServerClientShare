@@ -13,7 +13,10 @@ public class TowerSegmentDTO : DatabaseDTO<TowerSegmentDTO>
 {
     public List<TowerResourceDTO> RequiredResources { get; set; }
 
-    public TowerSegmentDTO() { }
+    public TowerSegmentDTO()
+    {
+        RequiredResources = new List<TowerResourceDTO>();
+    }
 
     public TowerSegmentDTO(List<TowerResourceDTO> resources)
     {

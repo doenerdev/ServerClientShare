@@ -24,6 +24,7 @@ namespace ServerClientShare.Services
                 ControlMode = type,
                 CurrentTowerSegment = _resourceService.GenerateNewTowerSegment()
             };
+            Console.WriteLine("REQ RESOURCES COUNT:" + playerDto.CurrentTowerSegment.RequiredResources.Count);
 
             return playerDto;
         }
