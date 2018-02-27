@@ -25,5 +25,10 @@ namespace ServerClientShare.Enums
         ServerSentGameAction,
         ServerSentChangeTurn,
         ServerSentNewTowerSegment,
+
+        ClientSentHexMap,
+        ClientSentDeck,
+        ClientSentMarketplace,
+        ClientSentMatch,
     }
 }

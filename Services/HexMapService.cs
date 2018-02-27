@@ -29,7 +29,10 @@ namespace ServerClientShare.Services
 
             for (int z = 0, i = 0; z < dto.Height; z++)
             {
-                for (int x = 0; x < dto.Width; x++)
+                int width = z % 2 == 0
+                    ? dto.Width
+                    : dto.Width + 1;
+                for (int x = 0; x < width; x++)
                 {
                     cells.Add(_hexCellService.CreateHexCell(x, z, i++));
                 }
@@ -37,6 +40,6 @@ namespace ServerClientShare.Services
             dto.Cells = cells;
 
             return dto;
-        } 
+        }
     }
 }
