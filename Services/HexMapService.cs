@@ -41,5 +41,10 @@ namespace ServerClientShare.Services
 
             return dto;
         }
+
+        public void UpdateHexMap(HexMapDTO dto)
+        {
+            _currentHexMapDto = dto;
+        }
     }
 }

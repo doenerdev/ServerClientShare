@@ -40,7 +40,7 @@ public class TowerSegmentDTO : DatabaseDTO<TowerSegmentDTO>
         TowerSegmentDTO dto = new TowerSegmentDTO();
         var qtyRequiredResources = message.GetInt(offset++);
 
-        while (offset < qtyRequiredResources)
+        for(int i = 0; i < qtyRequiredResources; i++)
         {
             dto.RequiredResources.Add(TowerResourceDTO.FromMessageArguments(message, ref offset));
         }
