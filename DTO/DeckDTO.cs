@@ -70,7 +70,7 @@ namespace ServerClientShare.DTO
             dto.DeckSize = dbObject.GetInt("DeckSize");
             var cardsDB = dbObject.GetArray("Cards");
 
-            for (int i = 0; i < cardsDB.Count; i++)
+            for (int i = 0; i < dto.DeckSize; i++)
             {
                 dto.Cards.Add(CardDTO.FromDBObject((DatabaseObject)cardsDB[i]));
             }

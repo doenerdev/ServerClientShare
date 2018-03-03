@@ -35,13 +35,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IDBSerializable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IMessageSerializable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MiniJson\MiniJson.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\PlayerAction.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DeckService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\HexCellService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\HexMapService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\PlayerService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ResourceService.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Models\" />
   </ItemGroup>
 </Project>

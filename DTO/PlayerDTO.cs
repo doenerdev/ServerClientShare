@@ -17,6 +17,7 @@ namespace ServerClientShare.DTO
         public string PlayerName { get; set; }
         public ControlMode ControlMode { get; set; }
         public TowerSegmentDTO CurrentTowerSegment { get; set; }
+        public LeaderDTO Leader { get; set; }
 
         public override Message ToMessage(Message message)
         {
@@ -24,6 +25,7 @@ namespace ServerClientShare.DTO
             message.Add(PlayerName);
             message.Add((int) ControlMode);
             message = CurrentTowerSegment.ToMessage(message);
+            message = Leader.ToMessage(message);
             return message;
         }
 
@@ -34,6 +36,7 @@ namespace ServerClientShare.DTO
             dto.PlayerName = message.GetString(offset++);
             dto.ControlMode = (ControlMode) message.GetInt(offset++);
             dto.CurrentTowerSegment = TowerSegmentDTO.FromMessageArguments(message, ref offset);
+            dto.Leader = LeaderDTO.FromMessageArguments(message, ref offset);
             return dto;
         }
 
@@ -47,6 +50,7 @@ namespace ServerClientShare.DTO
                 ? CurrentTowerSegment.ToDBObject()
                 : new DatabaseObject()
             );
+            dbObject.Set("Leader", Leader.ToDBObject());
 
             return dbObject;
         }
@@ -60,6 +64,7 @@ namespace ServerClientShare.DTO
             dto.PlayerName = dbObject.GetString("PlayerName");
             dto.ControlMode = (ControlMode) dbObject.GetInt("ControlMode");
             dto.CurrentTowerSegment = TowerSegmentDTO.FromDBObject(dbObject.GetObject("CurrentTowerSegment"));
+            dto.Leader = LeaderDTO.FromDBObject(dbObject.GetObject("Leader"));
 
             return dto;
         }

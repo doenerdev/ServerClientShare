@@ -89,8 +89,8 @@ namespace ServerClientShare.DTO
             HexMapDTO dto = new HexMapDTO(HexMapSize.M);
             dto.Width = dbObject.GetInt("Width");
             dto.Height = dbObject.GetInt("Height");
-            var cellsDB = dbObject.GetArray("Cells");
 
+            var cellsDB = dbObject.GetArray("Cells");
             for (int i = 0; i < cellsDB.Count; i++)
             {
                 dto.Cells.Add(HexCellDTO.FromDBObject((DatabaseObject) cellsDB[i]));

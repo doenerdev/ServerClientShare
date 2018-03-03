@@ -76,5 +76,14 @@ namespace ServerClientShare.Services
             return dto;
         }
 
+        public void UpdateMarketplace(DeckDTO dto)
+        {
+            _marketplace = dto;
+        }
+
+        public void UpdateDeck(DeckDTO dto)
+        {
+            _deck = dto;
+        }
     }
 }
