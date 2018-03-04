@@ -9,11 +9,14 @@
     <Import_RootNamespace>ServerClientShare</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)DTO\ActiveLeaderSkillDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\CardDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\DatabaseDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\DeckDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\DTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\HexCoordinatesDTO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DTO\LeaderDTO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DTO\LeaderSkillDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\MatchDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\PlayerDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\TowerResourceDTO.cs" />
@@ -23,12 +26,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Enums\HexCellType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\HexMapSize.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\HexUnitType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\LeaderType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\NetworkMessageType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\ControlMode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\ResourceType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\HexCellDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\HexMapDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\HexUnitDTO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\LeaderSkillType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\Die.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\RandomGenerator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\SimpleSerializer.cs" />
@@ -39,6 +44,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\DeckService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\HexCellService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\HexMapService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\LeaderService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\PlayerService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ResourceService.cs" />
   </ItemGroup>

@@ -15,6 +15,12 @@ namespace ServerClientShare.DTO
         public string Name { get; set; }
         public string Description { get; set; }
 
+        public LeaderSkillDTO()
+        {
+            Name = "";
+            Description = "";
+        }
+
         public override Message ToMessage(Message message)
         {
             message.Add((int) Type);

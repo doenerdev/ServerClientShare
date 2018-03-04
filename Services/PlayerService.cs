@@ -8,21 +8,24 @@ namespace ServerClientShare.Services
 {
     public class PlayerService
     {
-        private ResourceService _resourceService;
+        private readonly ResourceService _resourceService;
+        private readonly LeaderService _leaderService;
 
-        public PlayerService(ResourceService resourceService)
+        public PlayerService(ResourceService resourceService, LeaderService leaderService)
         {
             _resourceService = resourceService;
+            _leaderService = leaderService;
         }
 
-        public PlayerDTO GenerateInitialPlayer(string playerName, int index, ControlMode type = ControlMode.Remote)
+        public PlayerDTO GenerateInitialPlayer(string playerName, int index, LeaderType leaderType, ControlMode type = ControlMode.Remote)
         {
             var playerDto = new PlayerDTO()
             {
                 PlayerIndex = index,
                 PlayerName = playerName,
                 ControlMode = type,
-                CurrentTowerSegment = _resourceService.GenerateNewTowerSegment()
+                CurrentTowerSegment = _resourceService.GenerateNewTowerSegment(),
+                Leader = _leaderService.CreateLeader(leaderType)
             };
 
             return playerDto;

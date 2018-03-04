@@ -9,5 +9,8 @@ using System.Text;
         MarchingOrders,
         Riot,
         Masonry,
+
+        //Elf
+        ElvenMainPower
     }
 
