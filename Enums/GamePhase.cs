@@ -9,5 +9,5 @@ public enum GamePhase
     Initialize,
     Refresh,
     DrawCards,
-    Play
+    Play 
 }
