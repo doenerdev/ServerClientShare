@@ -16,6 +16,9 @@ namespace ServerClientShare.DTO
         public List<PlayerDTO> Players { get; private set; }
         public string GameId { get; set; }
         public int CurrentPlayerIndex { get; set; }
+        public GamePhase GamePhase { get; set; }
+        public int TurnNumber { get; set; }
+        public int LastPersistenceId { get; set; }
         public PlayerDTO CurrentPlayerDto => Players.Count > CurrentPlayerIndex && CurrentPlayerIndex >= 0 ? Players[CurrentPlayerIndex] : null; 
 
         public MatchDTO()
@@ -44,6 +47,7 @@ namespace ServerClientShare.DTO
         {
             message.Add(GameId);
             message.Add(CurrentPlayerIndex);
+            message.Add((int) GamePhase);
             message.Add(Players.Count);
 
             foreach (var player in Players)
@@ -59,6 +63,7 @@ namespace ServerClientShare.DTO
             MatchDTO dto = new MatchDTO();
             dto.GameId = message.GetString(offset++);
             dto.CurrentPlayerIndex = message.GetInt(offset++);
+            dto.GamePhase = (GamePhase) message.GetInt(offset++);
             var qtyPlayers = message.GetInt(offset++);
 
             for (int i = 0; i < qtyPlayers; i++)
@@ -74,6 +79,8 @@ namespace ServerClientShare.DTO
             DatabaseObject dbObject = new DatabaseObject();
             dbObject.Set("GameId", GameId);
             dbObject.Set("CurrentPlayerIndex", CurrentPlayerIndex);
+            dbObject.Set("TurnNumber", TurnNumber);
+            dbObject.Set("LastPersistenceHook", LastPersistenceHook);
 
             DatabaseArray playersDB = new DatabaseArray();
             if (Players != null)
@@ -95,6 +102,8 @@ namespace ServerClientShare.DTO
             MatchDTO dto = new MatchDTO();
             dto.GameId = dbObject.GetString("GameId");
             dto.CurrentPlayerIndex = dbObject.GetInt("CurrentPlayerIndex");
+            dto.TurnNumber = dbObject.GetInt("TurnNumber");
+            dto.LastPersistenceHook = dbObject.GetString("LastPersistenceHook");
 
             var playersDB = dbObject.GetArray("Players");
             for (int i = 0; i < playersDB.Count; i++)
