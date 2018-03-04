@@ -23,7 +23,7 @@ namespace ServerClientShare.Services
                         Name = "Dwarf", //TODO get all this data from the db
                         PrimarySkill = new LeaderSkillDTO()
                         {
-                            Type = LeaderSkillType.MarchingOrders
+                            Type = LeaderSkillType.ElvenMainPower
                         },
                         SecondarySkills = new List<ActiveLeaderSkillDTO>()
                         {
