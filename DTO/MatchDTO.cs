@@ -18,7 +18,6 @@ namespace ServerClientShare.DTO
         public int CurrentPlayerIndex { get; set; }
         public GamePhase GamePhase { get; set; }
         public int TurnNumber { get; set; }
-        public int LastPersistenceId { get; set; }
         public PlayerDTO CurrentPlayerDto => Players.Count > CurrentPlayerIndex && CurrentPlayerIndex >= 0 ? Players[CurrentPlayerIndex] : null; 
 
         public MatchDTO()
@@ -80,7 +79,6 @@ namespace ServerClientShare.DTO
             dbObject.Set("GameId", GameId);
             dbObject.Set("CurrentPlayerIndex", CurrentPlayerIndex);
             dbObject.Set("TurnNumber", TurnNumber);
-            dbObject.Set("LastPersistenceHook", LastPersistenceHook);
 
             DatabaseArray playersDB = new DatabaseArray();
             if (Players != null)
@@ -103,7 +101,6 @@ namespace ServerClientShare.DTO
             dto.GameId = dbObject.GetString("GameId");
             dto.CurrentPlayerIndex = dbObject.GetInt("CurrentPlayerIndex");
             dto.TurnNumber = dbObject.GetInt("TurnNumber");
-            dto.LastPersistenceHook = dbObject.GetString("LastPersistenceHook");
 
             var playersDB = dbObject.GetArray("Players");
             for (int i = 0; i < playersDB.Count; i++)
