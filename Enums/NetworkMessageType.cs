@@ -14,6 +14,7 @@ namespace ServerClientShare.Enums
         RequestDeck,
         RequestMarketplace,
         RequestNewTowerSegment,
+        RequestActionLog,
 
         GameActionPerformed,
         ChangeTurnPerformed,
