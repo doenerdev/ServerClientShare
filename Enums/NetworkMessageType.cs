@@ -30,5 +30,6 @@ namespace ServerClientShare.Enums
         ClientSentDeck,
         ClientSentMarketplace,
         ClientSentMatch,
+        ClientSentChangeTurn,
     }
 }

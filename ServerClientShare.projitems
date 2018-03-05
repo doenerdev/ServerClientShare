@@ -42,6 +42,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IMessageSerializable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MiniJson\MiniJson.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\PlayerAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\PlayerActionsLog.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DeckService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\HexCellService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\HexMapService.cs" />
