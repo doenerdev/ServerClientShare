@@ -15,6 +15,7 @@ namespace ServerClientShare.Enums
         RequestMarketplace,
         RequestNewTowerSegment,
         RequestActionLog,
+        RequestInitialGameplayData,
 
         GameActionPerformed,
         ChangeTurnPerformed,
@@ -26,6 +27,8 @@ namespace ServerClientShare.Enums
         ServerSentGameAction,
         ServerSentChangeTurn,
         ServerSentNewTowerSegment,
+        ServerSentActionLog,
+        ServerSentInitialGameplayData,
 
         ClientSentHexMap,
         ClientSentDeck,

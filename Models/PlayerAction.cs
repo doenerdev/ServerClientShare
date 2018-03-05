@@ -5,7 +5,7 @@ using PlayerIO.GameLibrary;
 #endif
 using ServerClientShare.Interfaces;
 
-namespace ServerGameCode
+namespace ServerClientShare.Models
 {
     public class PlayerAction : IMessageSerializable<PlayerAction>
     {
