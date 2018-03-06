@@ -35,6 +35,7 @@ namespace ServerClientShare.DTO
         {
             message.Add((int)HexCellType);
             message.Add(Resource != null ? (int)Resource.Type : (int)ResourceType.None);
+            message.Add(Units.Count);
 
             return message;
         }
@@ -47,6 +48,13 @@ namespace ServerClientShare.DTO
                 Resource = (ResourceType)message.GetInt(offset++) != ResourceType.None
                     ? new TowerResourceDTO((ResourceType)message.GetInt(offset-1)) : null
             };
+
+            var unitCount = message.GetInt(offset++);
+            for (int i = 0; i < unitCount; i++)
+            {
+                dto.Units.Add(HexUnitDTO.FromMessageArguments(message, ref offset));
+            }
+
             return dto;
         }
 
