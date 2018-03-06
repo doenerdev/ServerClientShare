@@ -62,7 +62,6 @@ namespace ServerClientShare.DTO
                 HexMap = HexMapDTO.FromDBObject(dbObject.GetObject("HexMap")),
                 Marketplace = DeckDTO.FromDBObject(dbObject.GetObject("Marketplace")),
                 Deck = DeckDTO.FromDBObject(dbObject.GetObject("Deck")),
-                ActionLog = PlayerActionsLogDTO.FromDBObject(dbObject.GetObject("PlayerActionLog"))
             };
 
             return dto;
