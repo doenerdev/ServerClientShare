@@ -21,11 +21,9 @@ namespace ServerClientShare.DTO
         public HexCoordinatesDTO Coordinates { get; set; }
         public HexUnitType Type { get; set; }
         public int Stamina { get; set; }
-        public string Id { get; set; }
 
         public override Message ToMessage(Message message)
         {
-            message.Add(Id);
             message.Add(PlayerId);
             message.Add((int) Type);
             message.Add(Stamina);
@@ -36,7 +34,6 @@ namespace ServerClientShare.DTO
         public new static HexUnitDTO FromMessageArguments(Message message, ref uint offset)
         {
             HexUnitDTO dto = new HexUnitDTO();
-            dto.Id = message.GetString(offset++);
             dto.PlayerId = message.GetInt(offset++);
             dto.Type = (HexUnitType) message.GetInt(offset++);
             dto.Stamina = message.GetInt(offset++);
@@ -51,7 +48,6 @@ namespace ServerClientShare.DTO
             dbObject.Set("Coordinates", Coordinates.ToDBObject());
             dbObject.Set("Type", (int) Type);
             dbObject.Set("Stamina", Stamina);
-            dbObject.Set("Id", Id);
 
             return dbObject;
         }
@@ -64,7 +60,6 @@ namespace ServerClientShare.DTO
             dto.PlayerId = dbObject.GetInt("PlayerId");
             dto.Type = (HexUnitType) dbObject.GetInt("Type");
             dto.Stamina = dbObject.GetInt("Stamina");
-            dto.Id = dbObject.GetString("Id");
 
             return dto;
         }
