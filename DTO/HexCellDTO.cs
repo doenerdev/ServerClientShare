@@ -37,6 +37,11 @@ namespace ServerClientShare.DTO
             message.Add(Resource != null ? (int)Resource.Type : (int)ResourceType.None);
             message.Add(Units.Count);
 
+            foreach (var unit in Units)
+            {
+                message = unit.ToMessage(message);
+            }
+
             return message;
         }
 
