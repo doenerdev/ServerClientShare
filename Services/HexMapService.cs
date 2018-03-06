@@ -28,7 +28,7 @@ namespace ServerClientShare.Services
 
         public HexMapService(DatabaseObject dbObject, HexCellService hexCellService, HexMapSize mapSize) : this(hexCellService, mapSize)
         {
-            HexMapDTO.FromDBObject(dbObject.GetObject("HexMap"));
+            _currentHexMapDto = HexMapDTO.FromDBObject(dbObject.GetObject("HexMap"));
         }
 
         private HexMapDTO GenerateNewHexMap(HexMapSize size)

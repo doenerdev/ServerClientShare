@@ -58,6 +58,7 @@ namespace ServerClientShare.DTO
 
             HexUnitDTO dto = new HexUnitDTO();
             dto.PlayerId = dbObject.GetInt("PlayerId");
+            dto.Coordinates = HexCoordinatesDTO.FromDBObject(dbObject.GetObject("Coordinates"));
             dto.Type = (HexUnitType) dbObject.GetInt("Type");
             dto.Stamina = dbObject.GetInt("Stamina");
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using ServerClientShare.Interfaces;
 #if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBGL || UNITY_IOS || UNITY_IPHONE || UNITY_ANDROID || UNITY_WII || UNITY_PS4 || UNITY_SAMSUNGTV || UNITY_XBOXONE || UNITY_TIZEN || UNITY_TVOS || UNITY_WP_8_1 || UNITY_WSA || UNITY_WSA_8_1 || UNITY_WSA_10_0 || UNITY_WINRT || UNITY_WINRT_8_1 || UNITY_WINRT_10_0
@@ -42,6 +43,18 @@ namespace ServerClientShare.DTO
             dbObject.Set("Y", Y);
             dbObject.Set("Z", Z);
             return dbObject;
+        }
+
+        public new static HexCoordinatesDTO FromDBObject(DatabaseObject dbObject)
+        {
+            if (dbObject.Count == 0) return null;
+
+            HexCoordinatesDTO dto = new HexCoordinatesDTO();
+            dto.X = dbObject.GetInt("X");
+            dto.Y = dbObject.GetInt("Y");
+            dto.Z = dbObject.GetInt("Z");
+
+            return dto;
         }
     }
 }
