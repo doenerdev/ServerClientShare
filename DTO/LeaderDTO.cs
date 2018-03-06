@@ -20,6 +20,7 @@ namespace ServerClientShare.DTO
         public LeaderDTO()
         {
             SecondarySkills = new List<ActiveLeaderSkillDTO>();
+            Name = "";
         }
 
         public override Message ToMessage(Message message)

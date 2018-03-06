@@ -17,8 +17,16 @@ namespace ServerClientShare.DTO
         public string PlayerName { get; set; }
         public ControlMode ControlMode { get; set; }
         public int CurrentTurn { get; set; }
+        public int CurrentActionLogIndex { get; set; }
+        public int Score { get; set; }
         public TowerSegmentDTO CurrentTowerSegment { get; set; }
         public LeaderDTO Leader { get; set; }
+        public List<TowerResourceDTO> Resources { get; set; }
+
+        public PlayerDTO()
+        {
+            Resources = new List<TowerResourceDTO>();
+        }
 
         public override Message ToMessage(Message message)
         {
@@ -26,8 +34,17 @@ namespace ServerClientShare.DTO
             message.Add(PlayerName);
             message.Add((int) ControlMode);
             message.Add(CurrentTurn);
+            message.Add(CurrentActionLogIndex);
+            message.Add(Score);
             message = CurrentTowerSegment.ToMessage(message);
             message = Leader.ToMessage(message);
+
+            message.Add(Resources.Count);
+            foreach (var resource in Resources)
+            {
+                message = resource.ToMessage(message);
+            }
+
             return message;
         }
 
@@ -38,8 +55,17 @@ namespace ServerClientShare.DTO
             dto.PlayerName = message.GetString(offset++);
             dto.ControlMode = (ControlMode) message.GetInt(offset++);
             dto.CurrentTurn = message.GetInt(offset++);
+            dto.CurrentActionLogIndex = message.GetInt(offset++);
+            dto.Score = message.GetInt(offset++);
             dto.CurrentTowerSegment = TowerSegmentDTO.FromMessageArguments(message, ref offset);
             dto.Leader = LeaderDTO.FromMessageArguments(message, ref offset);
+
+            var resourcesCount = message.GetInt(offset++);
+            for (int i = 0; i < resourcesCount; i++)
+            {
+                dto.Resources.Add(TowerResourceDTO.FromMessageArguments(message, ref offset));
+            }
+
             return dto;
         }
 
@@ -56,6 +82,16 @@ namespace ServerClientShare.DTO
             );
             dbObject.Set("Leader", Leader.ToDBObject());
 
+            DatabaseArray resourcesDB = new DatabaseArray();
+            if (Resources != null)
+            {
+                foreach (var resource in Resources)
+                {
+                    resourcesDB.Add(resource.ToDBObject());
+                }
+            }
+            dbObject.Set("Resources", resourcesDB);
+
             return dbObject;
         }
 
@@ -70,6 +106,12 @@ namespace ServerClientShare.DTO
             dto.CurrentTurn = dbObject.GetInt("CurrentTurn");
             dto.CurrentTowerSegment = TowerSegmentDTO.FromDBObject(dbObject.GetObject("CurrentTowerSegment"));
             dto.Leader = LeaderDTO.FromDBObject(dbObject.GetObject("Leader"));
+
+            var resourcesDB = dbObject.GetArray("Resources");
+            foreach (object resource in resourcesDB)
+            {
+                dto.Resources.Add(TowerResourceDTO.FromDBObject((DatabaseObject)resource));
+            }
 
             return dto;
         }
