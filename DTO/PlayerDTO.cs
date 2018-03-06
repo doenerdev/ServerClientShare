@@ -19,13 +19,16 @@ namespace ServerClientShare.DTO
         public int CurrentTurn { get; set; }
         public int CurrentActionLogIndex { get; set; }
         public int Score { get; set; }
+        public int CardsDrawn { get; set; }
         public TowerSegmentDTO CurrentTowerSegment { get; set; }
         public LeaderDTO Leader { get; set; }
         public List<TowerResourceDTO> Resources { get; set; }
+        public DeckDTO Hand { get; set; }
 
         public PlayerDTO()
         {
             Resources = new List<TowerResourceDTO>();
+            Hand = new DeckDTO();
         }
 
         public override Message ToMessage(Message message)
@@ -36,6 +39,7 @@ namespace ServerClientShare.DTO
             message.Add(CurrentTurn);
             message.Add(CurrentActionLogIndex);
             message.Add(Score);
+            message.Add(CardsDrawn);
             message = CurrentTowerSegment.ToMessage(message);
             message = Leader.ToMessage(message);
 
@@ -44,6 +48,8 @@ namespace ServerClientShare.DTO
             {
                 message = resource.ToMessage(message);
             }
+
+            message = Hand.ToMessage(message);
 
             return message;
         }
@@ -57,6 +63,7 @@ namespace ServerClientShare.DTO
             dto.CurrentTurn = message.GetInt(offset++);
             dto.CurrentActionLogIndex = message.GetInt(offset++);
             dto.Score = message.GetInt(offset++);
+            dto.CardsDrawn = message.GetInt(offset++);
             dto.CurrentTowerSegment = TowerSegmentDTO.FromMessageArguments(message, ref offset);
             dto.Leader = LeaderDTO.FromMessageArguments(message, ref offset);
 
@@ -65,6 +72,8 @@ namespace ServerClientShare.DTO
             {
                 dto.Resources.Add(TowerResourceDTO.FromMessageArguments(message, ref offset));
             }
+
+            dto.Hand = DeckDTO.FromMessageArguments(message, ref offset);
 
             return dto;
         }
@@ -76,6 +85,7 @@ namespace ServerClientShare.DTO
             dbObject.Set("PlayerName", PlayerName);
             dbObject.Set("ControlMode", (int) ControlMode);
             dbObject.Set("CurrentTurn", CurrentTurn);
+            dbObject.Set("CardsDrawn", CardsDrawn);
             dbObject.Set("CurrentTowerSegment", CurrentTowerSegment != null 
                 ? CurrentTowerSegment.ToDBObject()
                 : new DatabaseObject()
@@ -92,6 +102,8 @@ namespace ServerClientShare.DTO
             }
             dbObject.Set("Resources", resourcesDB);
 
+            dbObject.Set("Hand", Hand.ToDBObject());
+
             return dbObject;
         }
 
@@ -104,6 +116,7 @@ namespace ServerClientShare.DTO
             dto.PlayerName = dbObject.GetString("PlayerName");
             dto.ControlMode = (ControlMode) dbObject.GetInt("ControlMode");
             dto.CurrentTurn = dbObject.GetInt("CurrentTurn");
+            dto.CardsDrawn = dbObject.GetInt("CardsDrawn");
             dto.CurrentTowerSegment = TowerSegmentDTO.FromDBObject(dbObject.GetObject("CurrentTowerSegment"));
             dto.Leader = LeaderDTO.FromDBObject(dbObject.GetObject("Leader"));
 
@@ -112,6 +125,8 @@ namespace ServerClientShare.DTO
             {
                 dto.Resources.Add(TowerResourceDTO.FromDBObject((DatabaseObject)resource));
             }
+
+            dto.Hand = DeckDTO.FromDBObject(dbObject.GetObject("Hand"));
 
             return dto;
         }
