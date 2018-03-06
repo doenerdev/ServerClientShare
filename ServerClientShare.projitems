@@ -15,9 +15,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)DTO\DeckDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\DTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\HexCoordinatesDTO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DTO\InitialGameplayDataDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\LeaderDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\LeaderSkillDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\MatchDTO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DTO\PlayerActionsLogDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\PlayerDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\TowerResourceDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\TowerSegmentDTO.cs" />

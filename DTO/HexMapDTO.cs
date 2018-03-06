@@ -40,6 +40,7 @@ namespace ServerClientShare.DTO
         {
             message.Add(Width);
             message.Add(Height);
+            message.Add(Cells.Count);
 
             foreach (var cell in Cells)
             {
@@ -55,7 +56,8 @@ namespace ServerClientShare.DTO
             dto.Width = message.GetInt(offset++);
             dto.Height = message.GetInt(offset++);
 
-            while (offset < message.Count)
+            var cellsCount = message.GetInt(offset++);
+            for (int i = 0; i < cellsCount; i++)
             {
                 dto.Cells.Add(HexCellDTO.FromMessageArguments(message, ref offset));
             }
