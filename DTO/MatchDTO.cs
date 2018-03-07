@@ -79,6 +79,7 @@ namespace ServerClientShare.DTO
             dbObject.Set("GameId", GameId);
             dbObject.Set("CurrentPlayerIndex", CurrentPlayerIndex);
             dbObject.Set("TurnNumber", TurnNumber);
+            dbObject.Set("GamePhase", (int) GamePhase);
 
             DatabaseArray playersDB = new DatabaseArray();
             if (Players != null)
@@ -101,6 +102,7 @@ namespace ServerClientShare.DTO
             dto.GameId = dbObject.GetString("GameId");
             dto.CurrentPlayerIndex = dbObject.GetInt("CurrentPlayerIndex");
             dto.TurnNumber = dbObject.GetInt("TurnNumber");
+            dto.GamePhase = (GamePhase) dbObject.GetInt("GamePhase");
 
             var playersDB = dbObject.GetArray("Players");
             for (int i = 0; i < playersDB.Count; i++)
