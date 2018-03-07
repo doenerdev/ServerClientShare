@@ -20,6 +20,7 @@ namespace ServerClientShare.DTO
         public int CurrentActionLogIndex { get; set; }
         public int Score { get; set; }
         public int CardsDrawn { get; set; }
+        public int CardsPlayed { get; set; }
         public TowerSegmentDTO CurrentTowerSegment { get; set; }
         public LeaderDTO Leader { get; set; }
         public List<TowerResourceDTO> Resources { get; set; }
@@ -40,6 +41,7 @@ namespace ServerClientShare.DTO
             message.Add(CurrentActionLogIndex);
             message.Add(Score);
             message.Add(CardsDrawn);
+            message.Add(CardsPlayed);
             message = CurrentTowerSegment.ToMessage(message);
             message = Leader.ToMessage(message);
 
@@ -64,6 +66,7 @@ namespace ServerClientShare.DTO
             dto.CurrentActionLogIndex = message.GetInt(offset++);
             dto.Score = message.GetInt(offset++);
             dto.CardsDrawn = message.GetInt(offset++);
+            dto.CardsPlayed = message.GetInt(offset++);
             dto.CurrentTowerSegment = TowerSegmentDTO.FromMessageArguments(message, ref offset);
             dto.Leader = LeaderDTO.FromMessageArguments(message, ref offset);
 
@@ -86,6 +89,7 @@ namespace ServerClientShare.DTO
             dbObject.Set("ControlMode", (int) ControlMode);
             dbObject.Set("CurrentTurn", CurrentTurn);
             dbObject.Set("CardsDrawn", CardsDrawn);
+            dbObject.Set("CardsPlayed", CardsPlayed);
             dbObject.Set("CurrentTowerSegment", CurrentTowerSegment != null 
                 ? CurrentTowerSegment.ToDBObject()
                 : new DatabaseObject()
@@ -117,6 +121,7 @@ namespace ServerClientShare.DTO
             dto.ControlMode = (ControlMode) dbObject.GetInt("ControlMode");
             dto.CurrentTurn = dbObject.GetInt("CurrentTurn");
             dto.CardsDrawn = dbObject.GetInt("CardsDrawn");
+            dto.CardsPlayed = dbObject.GetInt("CardsPlayed");
             dto.CurrentTowerSegment = TowerSegmentDTO.FromDBObject(dbObject.GetObject("CurrentTowerSegment"));
             dto.Leader = LeaderDTO.FromDBObject(dbObject.GetObject("Leader"));
 
