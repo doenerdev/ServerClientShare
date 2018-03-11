@@ -13,6 +13,10 @@ namespace ServerClientShare.Models
         private readonly string _actionName;
         private readonly string _actionJson;
 
+        public string PlayerName => _playerName;
+        public string ActionName => _actionName;
+        public string ActionJson => _actionJson;
+
         public PlayerAction(string playerName, string actionName, string actionJson)
         {
             _actionName = actionName;
