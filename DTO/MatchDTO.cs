@@ -47,6 +47,7 @@ namespace ServerClientShare.DTO
             message.Add(GameId);
             message.Add(CurrentPlayerIndex);
             message.Add((int) GamePhase);
+            message.Add(TurnNumber);
             message.Add(Players.Count);
 
             foreach (var player in Players)
@@ -63,6 +64,7 @@ namespace ServerClientShare.DTO
             dto.GameId = message.GetString(offset++);
             dto.CurrentPlayerIndex = message.GetInt(offset++);
             dto.GamePhase = (GamePhase) message.GetInt(offset++);
+            dto.TurnNumber) = message.GetInt(offset++);
             var qtyPlayers = message.GetInt(offset++);
 
             for (int i = 0; i < qtyPlayers; i++)
