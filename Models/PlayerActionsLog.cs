@@ -67,7 +67,6 @@ namespace ServerClientShare.Models
 #endif
 
 
-
         public void AddPlayerAction(PlayerAction action)
         {
             _playerActions.Add(action);

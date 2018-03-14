@@ -11,6 +11,7 @@ using PlayerIO.GameLibrary;
 using ServerClientShare.DTO;
 using ServerClientShare.Enums;
 using ServerClientShare.Helper;
+using ServerGameCode;
 
 namespace ServerClientShare.Services
 {
@@ -29,7 +30,7 @@ namespace ServerClientShare.Services
             {
                 if (_deck == null)
                 {
-                    Console.WriteLine("Generate Deck");
+                    Console.WriteLine("Generate Marketplace");
                     _deck = GenerateDeck(DeckSize);
                 }
                 return _deck;
@@ -56,8 +57,14 @@ namespace ServerClientShare.Services
 
         public DeckService(DatabaseObject dbObject, ServerClientShare.Helper.RandomGenerator rndGenerator) : this(rndGenerator)
         {
-            _deck = DeckDTO.FromDBObject(dbObject.GetObject("Deck"));
+            _deck = DeckDTO.FromDBObject(dbObject.GetObject("Marketplace"));
             _marketplace = DeckDTO.FromDBObject(dbObject.GetObject("Marketplace"));
+        }
+
+        public DeckService(GameSessionsPersistenceDataDTO sessionData, ServerClientShare.Helper.RandomGenerator rndGenerator) : this(rndGenerator)
+        {
+            _deck = sessionData.Turns.Last().Deck;
+            _marketplace = sessionData.Turns.Last().Marketplace;
         }
 
         private DeckDTO GenerateDeck(int size)

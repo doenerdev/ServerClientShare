@@ -87,6 +87,7 @@ namespace ServerClientShare.DTO
             dbObject.Set("PlayerIndex", PlayerIndex);
             dbObject.Set("PlayerName", PlayerName);
             dbObject.Set("ControlMode", (int) ControlMode);
+            dbObject.Set("CurrentActionLogIndex", CurrentActionLogIndex);
             dbObject.Set("CurrentTurn", CurrentTurn);
             dbObject.Set("CardsDrawn", CardsDrawn);
             dbObject.Set("CardsPlayed", CardsPlayed);
@@ -119,6 +120,7 @@ namespace ServerClientShare.DTO
             dto.PlayerIndex = dbObject.GetInt("PlayerIndex");
             dto.PlayerName = dbObject.GetString("PlayerName");
             dto.ControlMode = (ControlMode) dbObject.GetInt("ControlMode");
+            dto.CurrentActionLogIndex = dbObject.GetInt("CurrentActionLogIndex");
             dto.CurrentTurn = dbObject.GetInt("CurrentTurn");
             dto.CardsDrawn = dbObject.GetInt("CardsDrawn");
             dto.CardsPlayed = dbObject.GetInt("CardsPlayed");

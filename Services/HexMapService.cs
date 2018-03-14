@@ -9,6 +9,7 @@ using PlayerIOClient;
 using PlayerIO.GameLibrary;
 #endif
 using ServerClientShare.DTO;
+using ServerGameCode;
 
 namespace ServerClientShare.Services
 {
@@ -28,7 +29,12 @@ namespace ServerClientShare.Services
 
         public HexMapService(DatabaseObject dbObject, HexCellService hexCellService, HexMapSize mapSize) : this(hexCellService, mapSize)
         {
-            _currentHexMapDto = HexMapDTO.FromDBObject(dbObject.GetObject("HexMap"));
+            _currentHexMapDto = HexMapDTO.FromDBObject(dbObject.GetObject("Marketplace"));
+        }
+
+        public HexMapService(GameSessionsPersistenceDataDTO sessionData, HexCellService hexCellService, HexMapSize mapSize) : this(hexCellService, mapSize)
+        {
+            _currentHexMapDto = sessionData.Turns.Last().HexMap;
         }
 
         private HexMapDTO GenerateNewHexMap(HexMapSize size)

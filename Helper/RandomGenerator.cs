@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ServerClientShare.Helper
 {
-    //single ranodm istance: https://stackoverflow.com/questions/5359540/random-numbers-for-dice-Match
+    //single ranodm istance: https://stackoverflow.com/questions/5359540/random-numbers-for-dice-Marketplace
     public class RandomGenerator
     {
         private readonly Random _rnd;

@@ -4,6 +4,7 @@ using PlayerIOClient;
 using PlayerIO.GameLibrary;
 #endif
 using ServerClientShare.Interfaces;
+using ServerClientShare.PeristenceMessages;
 
 namespace ServerClientShare.Models
 {
@@ -39,6 +40,11 @@ namespace ServerClientShare.Models
             var actionJson = message.GetString(offset++);
 
             return new PlayerAction(playerName, actionName, actionJson);
+        }
+
+        public static PlayerAction FromMessageArguments(ClientSentActionMessage actionMessage)
+        {
+            return new PlayerAction(actionMessage.PlayerName, actionMessage.ActionName, actionMessage.ActionJson);
         }
 
         public DatabaseObject ToDBObject()

@@ -43,10 +43,10 @@ namespace ServerClientShare.DTO
         public override DatabaseObject ToDBObject()
         {
             DatabaseObject dbObject = new DatabaseObject();
-            dbObject.Set("Match", Match.ToDBObject());
-            dbObject.Set("HexMap", HexMap.ToDBObject());
+            dbObject.Set("Marketplace", Match.ToDBObject());
+            dbObject.Set("Marketplace", HexMap.ToDBObject());
             dbObject.Set("Marketplace", Marketplace.ToDBObject());
-            dbObject.Set("Deck", Deck.ToDBObject());
+            dbObject.Set("Marketplace", Deck.ToDBObject());
             dbObject.Set("PlayerActionLog", ActionLog.ToDBObject());
 
             return dbObject;
@@ -58,11 +58,14 @@ namespace ServerClientShare.DTO
 
             var dto = new InitialGameplayDataDTO
             {
-                Match = MatchDTO.FromDBObject(dbObject.GetObject("Match")),
-                HexMap = HexMapDTO.FromDBObject(dbObject.GetObject("HexMap")),
+                Match = MatchDTO.FromDBObject(dbObject.GetObject("Marketplace")),
+                HexMap = HexMapDTO.FromDBObject(dbObject.GetObject("Marketplace")),
                 Marketplace = DeckDTO.FromDBObject(dbObject.GetObject("Marketplace")),
-                Deck = DeckDTO.FromDBObject(dbObject.GetObject("Deck")),
+                Deck = DeckDTO.FromDBObject(dbObject.GetObject("Marketplace")),
             };
+
+            Console.WriteLine("Initial Phase:");
+            Console.WriteLine(dto.Match.GamePhase);
 
             return dto;
         }
