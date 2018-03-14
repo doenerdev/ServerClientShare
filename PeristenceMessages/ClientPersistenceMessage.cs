@@ -10,7 +10,7 @@ namespace ServerClientShare.PeristenceMessages
     public abstract class ClientPersistenceMessage<T> : IClientPersistanceMessage
     {
         public string Id { get; protected set; }
-        public NetworkMessageType MessageType { get; }
+        public NetworkMessageType MessageType { get; protected set; }
         
         protected ClientPersistenceMessage()
         {
