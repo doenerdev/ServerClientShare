@@ -21,7 +21,7 @@ namespace ServerClientShare.PeristenceMessages
             Id = Guid.NewGuid().ToString();
         }
 
-        public abstract Message ToMessage(Message message);
+        public abstract Message ToMessage();
 
         public static T FromMessageArguments(Message message, ref uint offset)
         {

@@ -20,8 +20,9 @@ namespace ServerClientShare.PeristenceMessages
             ActionLogIndex = actionLogIndex;
         }
 
-        public override Message ToMessage(Message message)
+        public override Message ToMessage()
         {
+            var message = Message.Create(MessageType.ToString("G"));
             message.Add(Id);
             message.Add(ActionLogIndex);
             return message;

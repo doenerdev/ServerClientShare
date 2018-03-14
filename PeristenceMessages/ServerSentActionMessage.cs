@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ServerClientShare.Enums;
 
 namespace ServerClientShare.PeristenceMessages
 {
@@ -8,6 +9,7 @@ namespace ServerClientShare.PeristenceMessages
     {
         public ServerSentActionMessage(string actionName, string playerName, string actionJson) : base(actionName, playerName, actionJson)
         {
+            MessageType = NetworkMessageType.ServerSentGameAction;
         }
     }
 }

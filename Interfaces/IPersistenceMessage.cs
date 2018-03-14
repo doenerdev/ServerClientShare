@@ -14,6 +14,6 @@ namespace ServerClientShare.Interfaces
     {
         NetworkMessageType MessageType { get; }
         string Id { get; }
-        Message ToMessage(Message message);
+        Message ToMessage();
     }
 }

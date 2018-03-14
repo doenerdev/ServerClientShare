@@ -23,8 +23,9 @@ namespace ServerClientShare.PeristenceMessages
             Match = match;
         }
 
-        public override Message ToMessage(Message message)
+        public override Message ToMessage()
         {
+            var message = Message.Create(MessageType.ToString("G"));
             message.Add(Id);
             message.Add(TurnNumber);
             message = Match.ToMessage(message);
