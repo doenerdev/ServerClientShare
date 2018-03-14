@@ -7,7 +7,7 @@ using PlayerIOClient;
 using PlayerIO.GameLibrary;
 #endif
 using ServerClientShare.Enums;
-using ServerClientShare.Interfaces;
+using ServerClientShare.Interfaces; 
 
 namespace ServerClientShare.PeristenceMessages
 {
