@@ -20,6 +20,7 @@ namespace ServerClientShare.PeristenceMessages
         public override Message ToMessage()
         {
             var message = Message.Create(MessageType.ToString("G"));
+            message.Add((int) MessageType);
             return message;
         }
 
