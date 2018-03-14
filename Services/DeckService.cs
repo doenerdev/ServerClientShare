@@ -11,7 +11,6 @@ using PlayerIO.GameLibrary;
 using ServerClientShare.DTO;
 using ServerClientShare.Enums;
 using ServerClientShare.Helper;
-using ServerGameCode;
 
 namespace ServerClientShare.Services
 {
@@ -59,12 +58,6 @@ namespace ServerClientShare.Services
         {
             _deck = DeckDTO.FromDBObject(dbObject.GetObject("Marketplace"));
             _marketplace = DeckDTO.FromDBObject(dbObject.GetObject("Marketplace"));
-        }
-
-        public DeckService(GameSessionsPersistenceDataDTO sessionData, ServerClientShare.Helper.RandomGenerator rndGenerator) : this(rndGenerator)
-        {
-            _deck = sessionData.Turns.Last().Deck;
-            _marketplace = sessionData.Turns.Last().Marketplace;
         }
 
         private DeckDTO GenerateDeck(int size)
