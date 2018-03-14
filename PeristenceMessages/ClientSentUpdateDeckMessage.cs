@@ -11,7 +11,7 @@ using PlayerIO.GameLibrary;
 
 namespace ServerClientShare.PeristenceMessages
 {
-    public class ClientSentUpdateDeckMessage : PersitenceMessage<ClientSentUpdateDeckMessage>
+    public class ClientSentUpdateDeckMessage : ClientPersistenceMessage<ClientSentUpdateDeckMessage>
     {
         public int TurnNumber { get; set; }
         public DeckDTO Deck { get; set; }

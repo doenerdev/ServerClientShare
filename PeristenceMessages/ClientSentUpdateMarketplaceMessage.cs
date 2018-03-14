@@ -11,7 +11,7 @@ using PlayerIO.GameLibrary;
 
 namespace ServerClientShare.PeristenceMessages
 {
-    public class ClientSentUpdateMarketplaceMessage : PersitenceMessage<ClientSentUpdateMarketplaceMessage>
+    public class ClientSentUpdateMarketplaceMessage : ClientPersistenceMessage<ClientSentUpdateMarketplaceMessage>
     {
         public int TurnNumber { get; set; }
         public DeckDTO Marketplace { get; set; }

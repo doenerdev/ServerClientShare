@@ -11,7 +11,7 @@ using ServerClientShare.Enums;
 
 namespace ServerClientShare.PeristenceMessages
 {
-    public class ClientSentUpdateMatchMessage : PersitenceMessage<ClientSentUpdateMatchMessage>
+    public class ClientSentUpdateMatchMessage : ClientPersistenceMessage<ClientSentUpdateMatchMessage>
     {
         public int TurnNumber { get; set; }
         public MatchDTO Match { get; set; }

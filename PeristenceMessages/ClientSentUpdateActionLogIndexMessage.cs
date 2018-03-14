@@ -10,7 +10,7 @@ using PlayerIO.GameLibrary;
 
 namespace ServerClientShare.PeristenceMessages
 {
-    public class ClientSentUpdateActionLogIndexMessage : PersitenceMessage<ClientSentUpdateActionLogIndexMessage>
+    public class ClientSentUpdateActionLogIndexMessage : ClientPersistenceMessage<ClientSentUpdateActionLogIndexMessage>
     {
         public int ActionLogIndex { get; set; }
 

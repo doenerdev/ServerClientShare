@@ -10,7 +10,7 @@ using PlayerIO.GameLibrary;
 
 namespace ServerClientShare.PeristenceMessages
 {
-    public class ClientSentActionMessage : PersitenceMessage<ClientSentActionMessage>
+    public class ClientSentActionMessage : ClientPersistenceMessage<ClientSentActionMessage>
     {
         public string ActionName { get; set; }
         public string PlayerName { get; set; }

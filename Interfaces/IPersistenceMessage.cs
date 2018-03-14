@@ -13,7 +13,6 @@ namespace ServerClientShare.Interfaces
     public interface IPersistenceMessage
     {
         NetworkMessageType MessageType { get; }
-        string Id { get; }
         Message ToMessage();
     }
 }

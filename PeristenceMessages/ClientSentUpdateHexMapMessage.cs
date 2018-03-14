@@ -11,7 +11,7 @@ using ServerClientShare.Enums;
 
 namespace ServerClientShare.PeristenceMessages
 {
-    public class ClientSentUpdateHexMapMessage : PersitenceMessage<ClientSentUpdateHexMapMessage>
+    public class ClientSentUpdateHexMapMessage : ClientPersistenceMessage<ClientSentUpdateHexMapMessage>
     {
         public int TurnNumber { get; set; }
         public HexMapDTO HexMap { get; set; }

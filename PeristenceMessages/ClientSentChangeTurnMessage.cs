@@ -10,7 +10,7 @@ using PlayerIO.GameLibrary;
 
 namespace ServerClientShare.PeristenceMessages
 {
-    public class ClientSentChangeTurnMessage : PersitenceMessage<ClientSentChangeTurnMessage>
+    public class ClientSentChangeTurnMessage : ClientPersistenceMessage<ClientSentChangeTurnMessage>
     {
         public int TurnNumber { get; set; }
         public int NextPlayerIndex { get; set; }

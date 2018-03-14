@@ -29,6 +29,7 @@ namespace ServerClientShare.Enums
         ServerSentNewTowerSegment,
         ServerSentActionLog,
         ServerSentInitialGameplayData,
+        ServerConfirmedClientMessage,
 
         ClientSentHexMap,
         ClientSentDeck,
@@ -36,5 +37,6 @@ namespace ServerClientShare.Enums
         ClientSentMatch,
         ClientSentChangeTurn,
         ClientSentActionLogIndex,
+        ClientLeftGame,
     }
 }
