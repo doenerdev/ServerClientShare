@@ -29,6 +29,25 @@ public class ResourceService
         return new TowerSegmentDTO(requiredRessources);
     }
 
+    public ResourceType GetCorresponingResourceTypeForCell(HexCellType cellType)
+    {
+        var resourceType = ResourceType.None;
+        switch (cellType)
+        {
+            case HexCellType.Forest:
+                resourceType = ResourceType.Wood;
+                break;
+            case HexCellType.Desert:
+                resourceType = ResourceType.Glass;
+                break;
+            case HexCellType.Mountains:
+                resourceType = ResourceType.Stone;
+                break;
+        }
+
+        return resourceType;
+    }
+
     private TowerResourceDTO DieThrowToRessource(int die)
     {
         return die >= 6

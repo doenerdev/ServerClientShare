@@ -24,16 +24,11 @@ namespace ServerClientShare.DTO
         public int Height {get; set;}
         public List<HexCellDTO> Cells { get; set; }
 
-        public HexMapDTO(HexMapSize size)
+        public HexMapDTO()
         {
             Cells = new List<HexCellDTO>();
-            switch (size)
-            {
-                default:
-                    Width = 5;
-                    Height = 5;
-                    break;
-            }
+            Width = 5;
+            Height = 5;
         }
 
         public override Message ToMessage(Message message)
@@ -52,7 +47,7 @@ namespace ServerClientShare.DTO
 
         public new static HexMapDTO FromMessageArguments(Message message, ref uint offset)
         {
-            HexMapDTO dto = new HexMapDTO(HexMapSize.L);
+            HexMapDTO dto = new HexMapDTO();
             dto.Width = message.GetInt(offset++);
             dto.Height = message.GetInt(offset++);
 
@@ -88,7 +83,7 @@ namespace ServerClientShare.DTO
         {
             if (dbObject.Count == 0) return null;
 
-            HexMapDTO dto = new HexMapDTO(HexMapSize.M);
+            HexMapDTO dto = new HexMapDTO();
             dto.Width = dbObject.GetInt("Width");
             dto.Height = dbObject.GetInt("Height");
 
