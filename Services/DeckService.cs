@@ -69,17 +69,32 @@ namespace ServerClientShare.Services
             {
                 CardType cardType = CardType.CreateBuilder;
                 var rnd = _rndGenerator.RandomRange(0D, 1D);
-                if (rnd > 0.65D)
+                if (rnd > 0.75D)
                 {
                     cardType = CardType.CreateBuilder;
                 }
-                else if (rnd > 0.3D)
+                else if (rnd > 0.4D)
                 {
                     cardType = CardType.CreateFighter;
                 }
+                else if (rnd > 0.28D)
+                {
+                  //  cardType = CardType.Gift;
+                }
                 else
                 {
-                    cardType = CardType.Movement3;
+                    if (rnd > 0.2D)
+                    {
+                        cardType = CardType.Movement3;
+                    }
+                    else if (rnd > 0.1D)
+                    {
+                        cardType = CardType.Movement2;
+                    }
+                    else
+                    {
+                        cardType = CardType.Movement1;
+                    }
                 }
                 dto.Cards.Add(new CardDTO() { CardType = cardType });
             }

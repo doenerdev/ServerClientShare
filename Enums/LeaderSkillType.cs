@@ -6,11 +6,15 @@ using System.Text;
     public enum LeaderSkillType
     {
         //Dwarf
+        DwarvenMainPower,
         MarchingOrders,
         Riot,
         Masonry,
 
         //Elf
-        ElvenMainPower
+        ElvenMainPower,
+        SecondSpring,
+        Handicraft,
+        GuerillaAttack
     }
 
