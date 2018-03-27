@@ -26,6 +26,24 @@ namespace ServerClientShare.DTO
         public List<TowerResourceDTO> Resources { get; set; }
         public DeckDTO Hand { get; set; }
 
+        public HexCellType CellType
+        {
+            get
+            {
+                var cellType = HexCellType.Desert;
+                switch (Leader.Type)
+                {
+                    case LeaderType.Dwarf:
+                        cellType = HexCellType.Mountains;
+                        break;
+                    case LeaderType.Elf:
+                        cellType = HexCellType.Forest;
+                        break;
+                }
+                return cellType;
+            }
+        }
+
         public PlayerDTO()
         {
             Resources = new List<TowerResourceDTO>();

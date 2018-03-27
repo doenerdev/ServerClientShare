@@ -7,6 +7,7 @@ using PlayerIOClient;
 using PlayerIO.GameLibrary;
 #endif
 using ServerClientShare.Enums;
+using UnityEngine;
 
 namespace ServerClientShare.DTO
 {

@@ -20,7 +20,33 @@ namespace ServerClientShare.Services
             _rndGenerator = rndGenerator;
         }
 
-        public HexCellDTO CreateHexCell(int x, int z, int i)
+        public HexCellDTO CreateHexCell(int x, int z, int i, HexCellType cellType, bool hasResource = false)
+        {
+            TowerResourceDTO resource = null;
+            if (hasResource)
+            {
+                switch (cellType)
+                {
+                    case HexCellType.Forest:
+                        resource = new TowerResourceDTO(ResourceType.Wood);
+                        break;
+                    case HexCellType.Desert:
+                        resource = new TowerResourceDTO(ResourceType.Glass);
+                        break;
+                    case HexCellType.Mountains:
+                        resource = new TowerResourceDTO(ResourceType.Stone);
+                        break;
+                }
+            }
+
+            return new HexCellDTO()
+            {
+                HexCellType = cellType,
+                Resource = resource,
+            };
+        }
+
+        public HexCellDTO CreateHexCell(int x, int z, int i, bool hasResource = false)
         {
             //randomly select tile type
             var rnd = _rndGenerator.RandomRange(0f, 1f);
@@ -34,24 +60,7 @@ namespace ServerClientShare.Services
                 type = HexCellType.Forest;
             }
 
-            //randomly select resource
-            TowerResourceDTO resource = null;
-            var resourceRnd = _rndGenerator.RandomRange(0D, 1D);
-            if (resourceRnd > 0.75D)
-            {
-                var die = _die.RollW6();
-                resource = die >= 6
-                    ? new TowerResourceDTO(ResourceType.Glass)
-                    : die >= 4
-                        ? new TowerResourceDTO(ResourceType.Stone)
-                        : new TowerResourceDTO(ResourceType.Wood);
-            }
-
-            return new HexCellDTO()
-            {
-                HexCellType = type,
-                Resource = resource,
-            };
+            return CreateHexCell(x, z, i, type, hasResource);
         }
     }
 }

@@ -16,14 +16,13 @@ namespace ServerClientShare.Services
             switch (type)
             {
                 case LeaderType.Dwarf:
-                case LeaderType.Elf:
                     dto = new LeaderDTO()
                     {
                         Type = type,
                         Name = "Dwarf", //TODO get all this data from the db
                         PrimarySkill = new LeaderSkillDTO()
                         {
-                            Type = LeaderSkillType.ElvenMainPower
+                            Type = LeaderSkillType.DwarvenMainPower
                         },
                         SecondarySkills = new List<ActiveLeaderSkillDTO>()
                         {
@@ -40,6 +39,35 @@ namespace ServerClientShare.Services
                             new ActiveLeaderSkillDTO()
                             {
                                 Type = LeaderSkillType.Riot,
+                                CoolDown = 2
+                            },
+                        }
+                    };
+                    break;
+                case LeaderType.Elf:
+                    dto = new LeaderDTO()
+                    {
+                        Type = type,
+                        Name = "Elf", //TODO get all this data from the db
+                        PrimarySkill = new LeaderSkillDTO()
+                        {
+                            Type = LeaderSkillType.ElvenMainPower
+                        },
+                        SecondarySkills = new List<ActiveLeaderSkillDTO>()
+                        {
+                            new ActiveLeaderSkillDTO()
+                            {
+                                Type = LeaderSkillType.SecondSpring,
+                                CoolDown = 2
+                            },
+                            new ActiveLeaderSkillDTO()
+                            {
+                                Type = LeaderSkillType.Handicraft,
+                                CoolDown = 2
+                            },
+                            new ActiveLeaderSkillDTO()
+                            {
+                                Type = LeaderSkillType.GuerillaAttack,
                                 CoolDown = 2
                             },
                         }
