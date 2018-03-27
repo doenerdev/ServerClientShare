@@ -76,6 +76,7 @@ namespace ServerClientShare.DTO
             return dbObject;
         }
 
+#if !(UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBGL || UNITY_IOS || UNITY_IPHONE || UNITY_ANDROID || UNITY_WII || UNITY_PS4 || UNITY_SAMSUNGTV || UNITY_XBOXONE || UNITY_TIZEN || UNITY_TVOS || UNITY_WP_8_1 || UNITY_WSA || UNITY_WSA_8_1 || UNITY_WSA_10_0 || UNITY_WINRT || UNITY_WINRT_8_1 || UNITY_WINRT_10_0)
         public new static GameSessionsPersistenceDataDTO FromDBObject(DatabaseObject dbObject, ServerCode server)
         {
             if(dbObject.Count == 0) return null;
@@ -107,4 +108,37 @@ namespace ServerClientShare.DTO
             return dto;
         }
     }
+#else
+        public new static GameSessionsPersistenceDataDTO FromDBObject(DatabaseObject dbObject)
+        {
+            if (dbObject.Count == 0) return null;
+
+            GameSessionsPersistenceDataDTO dto = new GameSessionsPersistenceDataDTO();
+            dto.GameId = dbObject.GetString("GameId");
+            dto.CreatedTimestamp = dbObject.GetInt("CreatedTimestamp");
+
+            var playerIdsDB = dbObject.GetArray("PlayerIds");
+            for (int i = 0; i < playerIdsDB.Count; i++)
+            {
+                dto.PlayerIds.Add(playerIdsDB[i].ToString());
+            }
+
+            dto.ActionLog = PlayerActionsLog.FromDBObject(dbObject.GetObject("PlayerActionLog"));
+
+            var initialTurnsDB = dbObject.GetArray("InitialTurns");
+            foreach (object initialTurn in initialTurnsDB)
+            {
+                dto.InitialTurns.Add(GameSessionTurnDataDTO.FromDBObject((DatabaseObject)initialTurn));
+            }
+
+            var turnsDB = dbObject.GetArray("Turns");
+            foreach (object turn in turnsDB)
+            {
+                dto.Turns.Add(GameSessionTurnDataDTO.FromDBObject((DatabaseObject)turn));
+            }
+
+            return dto;
+        }
+    }
+#endif
 }
