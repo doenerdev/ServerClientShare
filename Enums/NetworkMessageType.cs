@@ -4,6 +4,7 @@ using System.Text;
 
 namespace ServerClientShare.Enums
 {
+    [Serializable]
     public enum NetworkMessageType
     {
         ServerGameIsInitializing,

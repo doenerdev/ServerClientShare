@@ -9,6 +9,7 @@ using PlayerIO.GameLibrary;
 
 namespace ServerClientShare.DTO
 {
+    [Serializable]
     public class LeaderSkillDTO : DatabaseDTO<LeaderSkillDTO>
     {
         public LeaderSkillType Type { get; set; }

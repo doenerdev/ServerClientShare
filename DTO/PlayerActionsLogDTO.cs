@@ -12,7 +12,7 @@ using ServerClientShare.MiniJson;
 using ServerClientShare.Models;
 
 
-
+[Serializable]
 public class PlayerActionsLogDTO : DatabaseDTO<PlayerActionsLogDTO>
 {
     public List<PlayerAction> PlayerActions { get; set; }

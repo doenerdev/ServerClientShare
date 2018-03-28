@@ -36,6 +36,11 @@ namespace ServerClientShare.Services
             _currentHexMapDto = HexMapDTO.FromDBObject(dbObject.GetObject("Marketplace"));
         }
 
+        public HexMapService(HexMapDTO mapDto, HexCellService hexCellService, List<PlayerDTO> players) : this(hexCellService, players)
+        {
+            _currentHexMapDto = mapDto;
+        }
+
         private void InitializeHexMapZones(HexMapDTO dto)
         {
             foreach (var player in _players)
@@ -120,6 +125,7 @@ namespace ServerClientShare.Services
         public void UpdateHexMap(HexMapDTO dto)
         {
             _currentHexMapDto = dto;
+            Debug.LogError("Hex map Units:" + _currentHexMapDto.Cells.Count(c => c.Units.Count > 0));
         }
     }
 }

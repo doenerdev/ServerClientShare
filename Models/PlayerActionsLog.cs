@@ -15,6 +15,7 @@ using ServerGameCode;
 
 namespace ServerClientShare.Models
 {
+    [Serializable]
     public class PlayerActionsLog
     {
         private readonly List<PlayerAction> _playerActions;

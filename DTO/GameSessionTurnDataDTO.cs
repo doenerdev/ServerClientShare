@@ -12,6 +12,7 @@ using ServerClientShare.DTO;
 
 namespace ServerClientShare.DTO
 {
+    [Serializable]
     public class GameSessionTurnDataDTO : DatabaseDTO<GameSessionTurnDataDTO>
     {
         public MatchDTO Match { get; set; }

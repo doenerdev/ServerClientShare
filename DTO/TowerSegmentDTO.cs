@@ -8,7 +8,7 @@ using PlayerIO.GameLibrary;
 #endif
 using ServerClientShare.DTO;
 
-
+[Serializable]
 public class TowerSegmentDTO : DatabaseDTO<TowerSegmentDTO>
 {
     public List<TowerResourceDTO> RequiredResources { get; set; }

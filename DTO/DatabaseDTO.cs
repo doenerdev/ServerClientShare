@@ -10,6 +10,7 @@ using ServerClientShare.Interfaces;
 
 namespace ServerClientShare.DTO
 {
+    [Serializable]
     public abstract class DatabaseDTO<T> : DTO<T>, IDBSerializable
     {
         public abstract DatabaseObject ToDBObject();

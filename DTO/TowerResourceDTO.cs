@@ -11,6 +11,7 @@ using ServerClientShare.Interfaces;
 
 namespace ServerClientShare.DTO
 {
+    [Serializable]
     public class TowerResourceDTO : DatabaseDTO<TowerResourceDTO>
     {
         public ResourceType Type { get; set; }

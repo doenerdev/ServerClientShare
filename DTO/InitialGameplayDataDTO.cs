@@ -9,6 +9,7 @@ using PlayerIO.GameLibrary;
 
 namespace ServerClientShare.DTO
 {
+    [Serializable]
     public class InitialGameplayDataDTO : DatabaseDTO<InitialGameplayDataDTO>
     {
         public MatchDTO Match { get; set; }

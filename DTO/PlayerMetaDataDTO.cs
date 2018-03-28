@@ -14,6 +14,7 @@ using ServerClientShare.DTO;
 
 namespace ServerClientShare.DTO
 {
+    [Serializable]
     public class PlayerMetaDataDTO : DatabaseDTO<PlayerMetaDataDTO>
     {
         public string PlayerName;
@@ -47,6 +48,20 @@ namespace ServerClientShare.DTO
             dto.IsOnline = dbObject.GetBool("IsOnline");
             dto.Leader = LeaderMetaDataDTO.FromDBObject(dbObject.GetObject("Leader"));
             return dto;
+        }
+
+        public static PlayerMetaDataDTO FromPlayerDTO(PlayerDTO dto, bool isOnline = true)
+        {
+            var metaData = new PlayerMetaDataDTO()
+            {
+                PlayerName = dto.PlayerName,
+                PlayerIndex = dto.PlayerIndex,
+                Score = dto.Score,
+                IsOnline = isOnline,
+                Leader = LeaderMetaDataDTO.FromLeaderDTO(dto.Leader)
+            };
+
+            return metaData;
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServerClientShare.Enums
 {
+    [Serializable]
     public enum HexCellType
     {
         Desert,

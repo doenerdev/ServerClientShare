@@ -13,6 +13,7 @@ using ServerClientShare.Enums;
 
 namespace ServerClientShare.DTO
 {
+    [Serializable]
     public class LeaderMetaDataDTO : DatabaseDTO<LeaderMetaDataDTO>
     {
         public LeaderType LeaderType { get; set; }
@@ -37,6 +38,16 @@ namespace ServerClientShare.DTO
             dto.LeaderType = (LeaderType) dbObject.GetInt("LeaderType");
             dto.Name = dbObject.GetString("Name");
             return dto;
+        }
+
+        public static LeaderMetaDataDTO FromLeaderDTO(LeaderDTO dto)
+        {
+            var metaData = new LeaderMetaDataDTO()
+            {
+                LeaderType = dto.Type,
+                Name = dto.Name
+            };
+            return metaData;
         }
     }
 }

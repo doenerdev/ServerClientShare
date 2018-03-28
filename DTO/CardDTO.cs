@@ -11,6 +11,7 @@ using UnityEngine;
 
 namespace ServerClientShare.DTO
 {
+    [Serializable]
     public class CardDTO : DatabaseDTO<CardDTO>
     {
         public CardType CardType { get; set; }

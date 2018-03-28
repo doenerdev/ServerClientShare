@@ -11,6 +11,7 @@ using ServerClientShare.Enums;
 
 namespace ServerClientShare.DTO
 {
+    [Serializable]
     public class MatchDTO : DatabaseDTO<MatchDTO>
     {
         public List<PlayerDTO> Players { get; private set; }
