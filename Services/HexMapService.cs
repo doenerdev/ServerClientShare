@@ -125,7 +125,6 @@ namespace ServerClientShare.Services
         public void UpdateHexMap(HexMapDTO dto)
         {
             _currentHexMapDto = dto;
-            Debug.LogError("Hex map Units:" + _currentHexMapDto.Cells.Count(c => c.Units.Count > 0));
         }
     }
 }
