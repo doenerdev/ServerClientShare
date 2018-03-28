@@ -9,6 +9,7 @@ using PlayerIOClient;
 using PlayerIO.GameLibrary;
 #endif
 using ServerClientShare.DTO;
+using ServerClientShare.Enums;
 
 namespace ServerClientShare.Services
 {
@@ -16,36 +17,36 @@ namespace ServerClientShare.Services
     {
         private HexCellService _hexCellService;
         private HexMapDTO _currentHexMapDto;
-        private List<PlayerDTO> _players;
         private Dictionary<int, List<int>> _playerZoneIndexes;
+        private int _playerCount;
         private int _playerZoneRadius = 2;
         private List<int> _resourceZoneIndexes;
 
-        public HexMapDTO CurrentHexMapDto => _currentHexMapDto ?? (_currentHexMapDto = GenerateNewHexMap(HexMapSize.L));
+        public HexMapDTO CurrentHexMapDto => _currentHexMapDto ?? (_currentHexMapDto = GenerateNewHexMap());
 
-        public HexMapService(HexCellService hexCellService, List<PlayerDTO> players)
+        public HexMapService(HexCellService hexCellService, int playerCount)
         {
+            _playerCount = playerCount;
             _hexCellService = hexCellService;
-            _players = players;
             _playerZoneIndexes = new Dictionary<int, List<int>>();
             _resourceZoneIndexes = new List<int>();
         }
 
-        public HexMapService(DatabaseObject dbObject, HexCellService hexCellService, List<PlayerDTO> players) : this(hexCellService, players)
+        public HexMapService(DatabaseObject dbObject, HexCellService hexCellService, int playerCount) : this(hexCellService, playerCount)
         {
             _currentHexMapDto = HexMapDTO.FromDBObject(dbObject.GetObject("Marketplace"));
         }
 
-        public HexMapService(HexMapDTO mapDto, HexCellService hexCellService, List<PlayerDTO> players) : this(hexCellService, players)
+        public HexMapService(HexMapDTO mapDto, HexCellService hexCellService, int playerCount) : this(hexCellService, playerCount)
         {
             _currentHexMapDto = mapDto;
         }
 
         private void InitializeHexMapZones(HexMapDTO dto)
         {
-            foreach (var player in _players)
+            for(int i = 0; i < _playerCount; i++)
             {
-                _playerZoneIndexes.Add(player.PlayerIndex, new List<int>());
+                _playerZoneIndexes.Add(i, new List<int>());
             }
 
             for (int z = 0, i = 0; z < dto.Height; z++)
@@ -75,11 +76,13 @@ namespace ServerClientShare.Services
             }
         }
 
-        private HexMapDTO GenerateNewHexMap(HexMapSize size)
+        private HexMapDTO GenerateNewHexMap()
         {
             Console.WriteLine("Generate New Hex Map");
+   
             var dto = new HexMapDTO();
             var cells = new List<HexCellDTO>();
+            Console.WriteLine("Height:" + dto.Height + " Width:");
 
             InitializeHexMapZones(dto);
 
@@ -90,20 +93,20 @@ namespace ServerClientShare.Services
                     : dto.Width + 1;
                 for (int x = 0; x < width; x++)
                 {
-                    for (int p = 0; p < _players.Count; p++) {
-                        if (_playerZoneIndexes[_players[p].PlayerIndex].Contains(i))
+                    for (int p = 0; p < _playerCount; p++) {
+                        if (_playerZoneIndexes[p].Contains(i))
                         {
                             cells.Add(_hexCellService.CreateHexCell(
                                 x: x, 
                                 z: z, 
                                 i: i,
-                                cellType:_players[p].CellType,
+                                cellType: HexCellType.LeaderSpecific,
                                 hasResource: false)
                             );
                             break;
                         }
 
-                        if (p == _players.Count - 1)
+                        if (p == _playerCount - 1)
                         {
                             cells.Add(_hexCellService.CreateHexCell(
                                 x: x,

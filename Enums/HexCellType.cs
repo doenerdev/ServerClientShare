@@ -12,6 +12,7 @@ namespace ServerClientShare.Enums
         Desert,
         Forest,
         Mountains,
+        LeaderSpecific,
     }
 }
 
