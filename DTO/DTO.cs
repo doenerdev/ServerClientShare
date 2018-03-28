@@ -18,6 +18,7 @@ using ServerClientShare.Interfaces;
 
 namespace ServerClientShare.DTO
 {
+    [Serializable]
     public abstract class DTO<T> : IMessageSerializable<T>
     {
         public static T FromMessageArguments(Message message, ref uint offset)

@@ -14,11 +14,13 @@ using ServerClientShare.Enums;
 
 namespace ServerClientShare.DTO
 {
+    [Serializable]
     public class GameSessionMetaDataDTO : DatabaseDTO<GameSessionMetaDataDTO>
     {
         public string GameId { get; set; }
         public GameStartedState GameStartedState { get; set; }
         public string CurrentPlayerName { get; set; }
+        public int TurnNumber { get; set; }
         public int RequiredRoomSize { get; set; }
         public List<PlayerMetaDataDTO> Players { get; set; }
 
@@ -38,6 +40,7 @@ namespace ServerClientShare.DTO
             dbObject.Set("GameId", GameId);
             dbObject.Set("GameStartedState", (int) GameStartedState);
             dbObject.Set("CurrentPlayerName", CurrentPlayerName);
+            dbObject.Set("TurnNumber", TurnNumber);
             dbObject.Set("RequiredRoomSize", RequiredRoomSize);
 
             DatabaseArray playersDB = new DatabaseArray();
@@ -59,6 +62,7 @@ namespace ServerClientShare.DTO
             dto.GameId = dbObject.GetString("GameId");
             dto.GameStartedState = (GameStartedState) dbObject.GetInt("GameStartedState");
             dto.CurrentPlayerName = dbObject.GetString("CurrentPlayerName");
+            dto.TurnNumber = dbObject.GetInt("TurnNumber");
             dto.RequiredRoomSize = dbObject.GetInt("RequiredRoomSize");
 
             var playersDB = dbObject.GetArray("Turns");

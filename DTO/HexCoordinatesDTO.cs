@@ -11,6 +11,7 @@ using PlayerIO.GameLibrary;
 
 namespace ServerClientShare.DTO
 {
+    [Serializable]
     public class HexCoordinatesDTO : DTO<HexCoordinatesDTO>, IDBSerializable
     {
         public int X { get; set; }

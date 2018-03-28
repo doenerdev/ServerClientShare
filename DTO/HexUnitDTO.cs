@@ -15,6 +15,7 @@ using ServerClientShare.Interfaces;
 
 namespace ServerClientShare.DTO
 {
+    [Serializable]
     public class HexUnitDTO : DatabaseDTO<HexUnitDTO>
     {
         public int PlayerId { get; set; }

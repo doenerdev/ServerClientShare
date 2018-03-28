@@ -60,6 +60,12 @@ namespace ServerClientShare.Services
             _marketplace = DeckDTO.FromDBObject(dbObject.GetObject("Marketplace"));
         }
 
+        public DeckService(DeckDTO marketplaceDto, DeckDTO deckDto, ServerClientShare.Helper.RandomGenerator rndGenerator) : this(rndGenerator)
+        {
+            _deck = deckDto;
+            _marketplace = marketplaceDto;
+        }
+
         private DeckDTO GenerateDeck(int size)
         {
             var dto = new DeckDTO();

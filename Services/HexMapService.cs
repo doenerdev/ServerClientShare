@@ -37,6 +37,11 @@ namespace ServerClientShare.Services
             _currentHexMapDto = HexMapDTO.FromDBObject(dbObject.GetObject("Marketplace"));
         }
 
+        public HexMapService(HexMapDTO mapDto, HexCellService hexCellService, List<PlayerDTO> players) : this(hexCellService, players)
+        {
+            _currentHexMapDto = mapDto;
+        }
+
         private void InitializeHexMapZones(HexMapDTO dto)
         {
             foreach (var player in _players)
@@ -89,7 +94,6 @@ namespace ServerClientShare.Services
                     for (int p = 0; p < _players.Count; p++) {
                         if (_playerZoneIndexes[_players[p].PlayerIndex].Contains(i))
                         {
-                            Debug.LogError("Add Start Zone CEll:" + _players[p].CellType);
                             cells.Add(_hexCellService.CreateHexCell(
                                 x: x, 
                                 z: z, 
@@ -122,6 +126,7 @@ namespace ServerClientShare.Services
         public void UpdateHexMap(HexMapDTO dto)
         {
             _currentHexMapDto = dto;
+            Debug.LogError("Hex map Units:" + _currentHexMapDto.Cells.Count(c => c.Units.Count > 0));
         }
     }
 }

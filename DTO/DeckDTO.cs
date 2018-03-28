@@ -10,6 +10,7 @@ using ServerClientShare.Enums;
 
 namespace ServerClientShare.DTO
 {
+    [Serializable]
     public class DeckDTO : DatabaseDTO<DeckDTO>
     {
         public int DeckSize { get; set; }
