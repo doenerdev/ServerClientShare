@@ -9,7 +9,6 @@ using PlayerIOClient;
 using PlayerIO.GameLibrary;
 #endif
 using ServerClientShare.DTO;
-using UnityEngine;
 
 namespace ServerClientShare.Services
 {
@@ -89,7 +88,6 @@ namespace ServerClientShare.Services
                     for (int p = 0; p < _players.Count; p++) {
                         if (_playerZoneIndexes[_players[p].PlayerIndex].Contains(i))
                         {
-                            Debug.LogError("Add Start Zone CEll:" + _players[p].CellType);
                             cells.Add(_hexCellService.CreateHexCell(
                                 x: x, 
                                 z: z, 
