@@ -71,7 +71,7 @@ public class TowerSegmentDTO : DatabaseDTO<TowerSegmentDTO>
         var resourcesDB = dbObject.GetArray("RequiredResources");
         for (int i = 0; i < resourcesDB.Count; i++)
         {
-            dto.RequiredResources.Add(TowerResourceDTO.FromDBObject((DatabaseObject)resourcesDB[i]));
+            dto.RequiredResources.Add(TowerResourceDTO.FromDBObject((DatabaseObject)resourcesDB.GetObject(i)));
         }
 
         return dto;

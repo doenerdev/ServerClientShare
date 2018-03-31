@@ -85,9 +85,9 @@ namespace ServerClientShare.DTO
             };
 
             var secondarySkillsDB = dbObject.GetArray("SecondarySkills");
-            foreach (object secondarySkill in secondarySkillsDB)
+            for (int i = 0; i < secondarySkillsDB.Count; i++)
             {
-                dto.SecondarySkills.Add(ActiveLeaderSkillDTO.FromDBObject((DatabaseObject) secondarySkill));
+                dto.SecondarySkills.Add(ActiveLeaderSkillDTO.FromDBObject((DatabaseObject)secondarySkillsDB.GetObject(i)));
             }
 
             return dto;

@@ -66,9 +66,9 @@ namespace ServerClientShare.DTO
             dto.RequiredRoomSize = dbObject.GetInt("RequiredRoomSize");
 
             var playersDB = dbObject.GetArray("Turns");
-            foreach (object player in playersDB)
+            for (int i = 0; i < playersDB.Count; i++)
             {
-                dto.Players.Add(PlayerMetaDataDTO.FromDBObject((DatabaseObject)player));
+                dto.Players.Add(PlayerMetaDataDTO.FromDBObject((DatabaseObject)playersDB.GetObject(i)));
             }
 
             return dto;

@@ -110,7 +110,7 @@ namespace ServerClientShare.DTO
             var playersDB = dbObject.GetArray("Players");
             for (int i = 0; i < playersDB.Count; i++)
             {
-                dto.Players.Add(PlayerDTO.FromDBObject((DatabaseObject)playersDB[i]));
+                dto.Players.Add(PlayerDTO.FromDBObject((DatabaseObject)playersDB.GetObject(i)));
             }
 
             return dto;

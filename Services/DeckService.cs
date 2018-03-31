@@ -51,12 +51,12 @@ namespace ServerClientShare.Services
 
         public DeckService(ServerClientShare.Helper.RandomGenerator rndGenerator)
         {
-            _rndGenerator = rndGenerator;
+           _rndGenerator = rndGenerator;
         }
 
         public DeckService(DatabaseObject dbObject, ServerClientShare.Helper.RandomGenerator rndGenerator) : this(rndGenerator)
         {
-            _deck = DeckDTO.FromDBObject(dbObject.GetObject("Marketplace"));
+            _deck = DeckDTO.FromDBObject(dbObject.GetObject("Deck"));
             _marketplace = DeckDTO.FromDBObject(dbObject.GetObject("Marketplace"));
         }
 

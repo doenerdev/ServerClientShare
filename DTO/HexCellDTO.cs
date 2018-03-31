@@ -93,7 +93,7 @@ namespace ServerClientShare.DTO
             var unitsDB = dbObject.GetArray("Units");
             for (int i = 0; i < unitsDB.Count; i++)
             {
-                dto.Units.Add(HexUnitDTO.FromDBObject((DatabaseObject)unitsDB[i]));
+                dto.Units.Add(HexUnitDTO.FromDBObject((DatabaseObject)unitsDB.GetObject(i)));
             }
 
             return dto;

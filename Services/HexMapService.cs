@@ -22,7 +22,7 @@ namespace ServerClientShare.Services
         private int _playerZoneRadius = 2;
         private List<int> _resourceZoneIndexes;
 
-        public HexMapDTO CurrentHexMapDto => _currentHexMapDto ?? (_currentHexMapDto = GenerateNewHexMap());
+        public HexMapDTO CurrentHexMapDto => _currentHexMapDto;
 
         public HexMapService(HexCellService hexCellService, int playerCount)
         {
@@ -34,7 +34,9 @@ namespace ServerClientShare.Services
 
         public HexMapService(DatabaseObject dbObject, HexCellService hexCellService, int playerCount) : this(hexCellService, playerCount)
         {
-            _currentHexMapDto = HexMapDTO.FromDBObject(dbObject.GetObject("Marketplace"));
+            _currentHexMapDto = HexMapDTO.FromDBObject(dbObject.GetObject("HexMap"));
+            Console.WriteLine("Initialized From DB Object");
+            Console.WriteLine(_currentHexMapDto.Cells.Count);
         }
 
         public HexMapService(HexMapDTO mapDto, HexCellService hexCellService, int playerCount) : this(hexCellService, playerCount)
@@ -76,14 +78,16 @@ namespace ServerClientShare.Services
             }
         }
 
-        private HexMapDTO GenerateNewHexMap()
+        public void GenerateNewHexMap(List<PlayerDTO> _players)
         {
             Console.WriteLine("Generate New Hex Map");
    
             var dto = new HexMapDTO();
             var cells = new List<HexCellDTO>();
             Console.WriteLine("Height:" + dto.Height + " Width:");
-
+            Console.WriteLine("Players Count:" + _players.Count);
+  
+            Console.WriteLine("PC:" + _playerCount);
             InitializeHexMapZones(dto);
 
             for (int z = 0, i = 0; z < dto.Height; z++)
@@ -100,7 +104,7 @@ namespace ServerClientShare.Services
                                 x: x, 
                                 z: z, 
                                 i: i,
-                                cellType: HexCellType.LeaderSpecific,
+                                cellType: _players[p].CellType,
                                 hasResource: false)
                             );
                             break;
@@ -122,7 +126,7 @@ namespace ServerClientShare.Services
             }
             dto.Cells = cells;
 
-            return dto;
+            _currentHexMapDto = dto;
         }
 
         public void UpdateHexMap(HexMapDTO dto)

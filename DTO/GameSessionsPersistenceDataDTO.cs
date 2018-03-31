@@ -45,7 +45,6 @@ namespace ServerClientShare.DTO
             DatabaseArray playerIdsDB = new DatabaseArray();
             if (PlayerIds != null)
             {
-                Console.WriteLine("PLAYER IDS COUNT:" + PlayerIds.Count);
                 foreach (var playerId in PlayerIds)
                 {
                     playerIdsDB.Add(playerId);
@@ -81,6 +80,7 @@ namespace ServerClientShare.DTO
 #if !(UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBGL || UNITY_IOS || UNITY_IPHONE || UNITY_ANDROID || UNITY_WII || UNITY_PS4 || UNITY_SAMSUNGTV || UNITY_XBOXONE || UNITY_TIZEN || UNITY_TVOS || UNITY_WP_8_1 || UNITY_WSA || UNITY_WSA_8_1 || UNITY_WSA_10_0 || UNITY_WINRT || UNITY_WINRT_8_1 || UNITY_WINRT_10_0)
         public new static GameSessionsPersistenceDataDTO FromDBObject(DatabaseObject dbObject, ServerCode server)
         {
+            Console.WriteLine("Count:" + dbObject.Count);
             if(dbObject.Count == 0) return null;
 
             GameSessionsPersistenceDataDTO dto = new GameSessionsPersistenceDataDTO();
@@ -90,21 +90,21 @@ namespace ServerClientShare.DTO
             var playerIdsDB = dbObject.GetArray("PlayerIds");
             for (int i = 0; i < playerIdsDB.Count; i++)
             {
-                dto.PlayerIds.Add(playerIdsDB[i].ToString());
+                dto.PlayerIds.Add(playerIdsDB.GetString(i));
             }
 
             dto.ActionLog = PlayerActionsLog.FromDBObject(dbObject.GetObject("PlayerActionLog"), server);
 
             var initialTurnsDB = dbObject.GetArray("InitialTurns");
-            foreach (object initialTurn in initialTurnsDB)
+            for (int i = 0; i < initialTurnsDB.Count; i++)
             {
-                dto.InitialTurns.Add(GameSessionTurnDataDTO.FromDBObject((DatabaseObject)initialTurn));
+                dto.InitialTurns.Add(GameSessionTurnDataDTO.FromDBObject((DatabaseObject)initialTurnsDB.GetObject(i)));
             }
 
             var turnsDB = dbObject.GetArray("Turns");
-            foreach (object turn in turnsDB)
+            for (int i = 0; i < turnsDB.Count; i++)
             {
-                dto.Turns.Add(GameSessionTurnDataDTO.FromDBObject((DatabaseObject)turn));
+                dto.Turns.Add(GameSessionTurnDataDTO.FromDBObject((DatabaseObject)turnsDB.GetObject(i)));
             }
 
             return dto;
@@ -113,6 +113,7 @@ namespace ServerClientShare.DTO
 #else
         public new static GameSessionsPersistenceDataDTO FromDBObject(DatabaseObject dbObject)
         {
+      Console.WriteLine("Count:" + dbObject.Count);
             if (dbObject.Count == 0) return null;
 
             GameSessionsPersistenceDataDTO dto = new GameSessionsPersistenceDataDTO();

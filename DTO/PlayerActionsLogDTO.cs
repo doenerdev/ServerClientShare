@@ -71,7 +71,7 @@ public class PlayerActionsLogDTO : DatabaseDTO<PlayerActionsLogDTO>
         var actionsDB = dbObject.GetArray("PlayerActions");
         for (int i = 0; i < actionsDB.Count; i++)
         {
-            dto.PlayerActions.Add(PlayerAction.FromDBObject((DatabaseObject)actionsDB[i]));
+            dto.PlayerActions.Add(PlayerAction.FromDBObject((DatabaseObject)actionsDB.GetObject(i)));
         }
 
         return dto;

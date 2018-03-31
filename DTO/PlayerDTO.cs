@@ -147,9 +147,9 @@ namespace ServerClientShare.DTO
             dto.Leader = LeaderDTO.FromDBObject(dbObject.GetObject("Leader"));
 
             var resourcesDB = dbObject.GetArray("Resources");
-            foreach (object resource in resourcesDB)
+            for (int i = 0; i < resourcesDB.Count; i++)
             {
-                dto.Resources.Add(TowerResourceDTO.FromDBObject((DatabaseObject)resource));
+                dto.Resources.Add(TowerResourceDTO.FromDBObject((DatabaseObject)resourcesDB.GetObject(i)));
             }
 
             dto.Hand = DeckDTO.FromDBObject(dbObject.GetObject("Hand"));
