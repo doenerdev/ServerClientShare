@@ -107,7 +107,7 @@ namespace ServerClientShare.Services
                                 cellType: _players[p].CellType,
                                 hasResource: false)
                             );
-                            break;
+                            break; 
                         }
 
                         if (p == _playerCount - 1)
