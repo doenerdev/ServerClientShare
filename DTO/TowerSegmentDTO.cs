@@ -12,10 +12,13 @@ using ServerClientShare.DTO;
 public class TowerSegmentDTO : DatabaseDTO<TowerSegmentDTO>
 {
     public List<TowerResourceDTO> RequiredResources { get; set; }
+    public bool IsFinished { get; set; }
+    public TowerSegmentVisualStyle VisualStyle { get; set; }
 
     public TowerSegmentDTO()
     {
         RequiredResources = new List<TowerResourceDTO>();
+        IsFinished = false;
     }
 
     public TowerSegmentDTO(List<TowerResourceDTO> resources)
@@ -31,6 +34,8 @@ public class TowerSegmentDTO : DatabaseDTO<TowerSegmentDTO>
         {
             message = resource.ToMessage(message);
         }
+        message.Add(IsFinished);
+        message.Add((int) VisualStyle);
 
         return message;
     }
@@ -44,6 +49,8 @@ public class TowerSegmentDTO : DatabaseDTO<TowerSegmentDTO>
         {
             dto.RequiredResources.Add(TowerResourceDTO.FromMessageArguments(message, ref offset));
         }
+        dto.IsFinished = message.GetBoolean(offset++);
+        dto.VisualStyle = (TowerSegmentVisualStyle) message.GetInt(offset++);
         return dto;
     }
 
@@ -59,7 +66,8 @@ public class TowerSegmentDTO : DatabaseDTO<TowerSegmentDTO>
             }
         }
         dbObject.Set("RequiredResources", resourcesDB);
-
+        dbObject.Set("IsFinished", IsFinished);
+        dbObject.Set("VisualStyle", (int) VisualStyle);
         return dbObject;
     }
 
@@ -73,7 +81,8 @@ public class TowerSegmentDTO : DatabaseDTO<TowerSegmentDTO>
         {
             dto.RequiredResources.Add(TowerResourceDTO.FromDBObject((DatabaseObject)resourcesDB.GetObject(i)));
         }
-
+        dto.IsFinished = dbObject.GetBool("IsFinished");
+        dto.VisualStyle = (TowerSegmentVisualStyle) dbObject.GetInt("VisualStyle");
         return dto;
     }
 }

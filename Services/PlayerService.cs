@@ -10,11 +10,13 @@ namespace ServerClientShare.Services
     {
         private readonly ResourceService _resourceService;
         private readonly LeaderService _leaderService;
+        private readonly TowerService _towerService;
 
-        public PlayerService(ResourceService resourceService, LeaderService leaderService)
+        public PlayerService(ResourceService resourceService, LeaderService leaderService, TowerService towerService)
         {
             _resourceService = resourceService;
             _leaderService = leaderService;
+            _towerService = towerService;
         }
 
         public PlayerDTO GenerateInitialPlayer(string playerName, int index, LeaderType leaderType, ControlMode type = ControlMode.Remote)
@@ -24,9 +26,10 @@ namespace ServerClientShare.Services
                 PlayerIndex = index,
                 PlayerName = playerName,
                 ControlMode = type,
-                CurrentTowerSegment = _resourceService.GenerateNewTowerSegment(),
+                Tower = _towerService.GenerateNewTower(),
                 Leader = _leaderService.CreateLeader(leaderType)
             };
+            playerDto.CurrentTowerSegment = playerDto.Tower.TowerSegments[playerDto.Tower.CurrentTowerSegmentIndex];
 
             return playerDto;
         }

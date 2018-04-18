@@ -31,7 +31,7 @@ namespace ServerClientShare.Services
                         resource = new TowerResourceDTO(ResourceType.Wood);
                         break;
                     case HexCellType.Desert:
-                        resource = new TowerResourceDTO(ResourceType.Glass);
+                        resource = new TowerResourceDTO(ResourceType.Sand);
                         break;
                     case HexCellType.Mountains:
                         resource = new TowerResourceDTO(ResourceType.Stone);

@@ -38,7 +38,7 @@ public class ResourceService
                 resourceType = ResourceType.Wood;
                 break;
             case HexCellType.Desert:
-                resourceType = ResourceType.Glass;
+                resourceType = ResourceType.Sand;
                 break;
             case HexCellType.Mountains:
                 resourceType = ResourceType.Stone;
@@ -51,9 +51,9 @@ public class ResourceService
     private TowerResourceDTO DieThrowToRessource(int die)
     {
         return die >= 6
-            ? new TowerResourceDTO(ResourceType.Glass)
+            ? new TowerResourceDTO(ResourceType.Sand)
             : die >= 4
-                ? new TowerResourceDTO(ResourceType.Glass)
+                ? new TowerResourceDTO(ResourceType.Sand)
                 : new TowerResourceDTO(ResourceType.Wood);
 
     }

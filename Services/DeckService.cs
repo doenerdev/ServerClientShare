@@ -85,7 +85,7 @@ namespace ServerClientShare.Services
                 }
                 else if (rnd > 0.28D)
                 {
-                  //  cardType = CardType.Gift;
+                    cardType = CardType.Gift;
                 }
                 else
                 {

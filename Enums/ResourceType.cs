@@ -10,6 +10,6 @@ namespace ServerClientShare.Enums
         None,
         Wood,
         Stone,
-        Glass
+        Sand
     }
 }
