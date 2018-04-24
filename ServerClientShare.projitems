@@ -26,6 +26,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DTO\PlayerActionsLogDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\PlayerDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\PlayerMetaDataDTO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DTO\TowerDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\TowerResourceDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DTO\TowerSegmentDTO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\CardType.cs" />
@@ -35,6 +36,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Enums\HexCellType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\HexMapSize.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\HexUnitType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\TowerSegmentVisualStyle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IClientPersistanceMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\LeaderType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\NetworkMessageType.cs" />
@@ -71,5 +73,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\LeaderService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\PlayerService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ResourceService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\TowerService.cs" />
   </ItemGroup>
 </Project>

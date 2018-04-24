@@ -9,6 +9,7 @@ namespace ServerClientShare.Enums
     {
         Pending,
         Started,
-        Ended
+        Ended,
+        Forfeit
     }
 }

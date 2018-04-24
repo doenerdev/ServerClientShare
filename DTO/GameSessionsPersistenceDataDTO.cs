@@ -19,6 +19,8 @@ namespace ServerClientShare.DTO
     {
         public string GameId { get; set; }
         public int CreatedTimestamp { get; set; }
+        public int LastActivityTimestamp { get; set; }
+        public string WinnerName { get; set; }
         public List<string> PlayerIds { get; set; }
         public PlayerActionsLog ActionLog { get; set; }
         public List<GameSessionTurnDataDTO> InitialTurns { get; set; }

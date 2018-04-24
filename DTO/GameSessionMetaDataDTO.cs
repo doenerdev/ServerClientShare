@@ -18,6 +18,8 @@ namespace ServerClientShare.DTO
     public class GameSessionMetaDataDTO : DatabaseDTO<GameSessionMetaDataDTO>
     {
         public string GameId { get; set; }
+        public int CreatedTimestamp { get; set; }
+        public int LastActivityTimestamp { get; set; }
         public GameStartedState GameStartedState { get; set; }
         public string CurrentPlayerName { get; set; }
         public int TurnNumber { get; set; }
@@ -38,6 +40,8 @@ namespace ServerClientShare.DTO
         {
             var dbObject = new DatabaseObject();
             dbObject.Set("GameId", GameId);
+            dbObject.Set("CreatedTimestamp", CreatedTimestamp);
+            dbObject.Set("LastActivityTimestamp", LastActivityTimestamp);
             dbObject.Set("GameStartedState", (int) GameStartedState);
             dbObject.Set("CurrentPlayerName", CurrentPlayerName);
             dbObject.Set("TurnNumber", TurnNumber);
@@ -60,6 +64,8 @@ namespace ServerClientShare.DTO
         {
             var dto = new GameSessionMetaDataDTO();
             dto.GameId = dbObject.GetString("GameId");
+            dto.CreatedTimestamp = dbObject.GetInt("CreatedTimestamp");
+            dto.LastActivityTimestamp = dbObject.GetInt("LastActivityTimestamp");
             dto.GameStartedState = (GameStartedState) dbObject.GetInt("GameStartedState");
             dto.CurrentPlayerName = dbObject.GetString("CurrentPlayerName");
             dto.TurnNumber = dbObject.GetInt("TurnNumber");
