@@ -39,5 +39,6 @@ namespace ServerClientShare.Enums
         ClientSentChangeTurn,
         ClientSentActionLogIndex,
         ClientLeftGame,
+        ClientSentWonGame,
     }
 }
