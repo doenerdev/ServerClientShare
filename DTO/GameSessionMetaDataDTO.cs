@@ -45,7 +45,7 @@ namespace ServerClientShare.DTO
             dbObject.Set("LastActivityTimestamp", LastActivityTimestamp);
             dbObject.Set("GameStartedState", (int) GameStartedState);
             dbObject.Set("CurrentPlayerName", CurrentPlayerName);
-            dbObject.Set("WinnerName", WinnerName);
+            dbObject.Set("WinnerName", WinnerName ?? "");
             dbObject.Set("TurnNumber", TurnNumber);
             dbObject.Set("RequiredRoomSize", RequiredRoomSize);
 

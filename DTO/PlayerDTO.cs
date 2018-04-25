@@ -93,6 +93,7 @@ namespace ServerClientShare.DTO
             dto.Tower = TowerDTO.FromMessageArguments(message, ref offset);
             dto.CurrentTowerSegment = TowerSegmentDTO.FromMessageArguments(message, ref offset);
             dto.Leader = LeaderDTO.FromMessageArguments(message, ref offset);
+            dto.EndedGame = message.GetBoolean(offset++);
 
             var resourcesCount = message.GetInt(offset++);
             for (int i = 0; i < resourcesCount; i++)
@@ -101,7 +102,6 @@ namespace ServerClientShare.DTO
             }
 
             dto.Hand = DeckDTO.FromMessageArguments(message, ref offset);
-            dto.EndedGame = message.GetBoolean(offset++);
 
             return dto;
         }
