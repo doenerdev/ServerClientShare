@@ -22,6 +22,7 @@ namespace ServerClientShare.DTO
         public int LastActivityTimestamp { get; set; }
         public string WinnerName { get; set; }
         public List<string> PlayerIds { get; set; }
+        public List<PlayerMetaDataDTO> Players { get; set; }
         public PlayerActionsLog ActionLog { get; set; }
         public List<GameSessionTurnDataDTO> InitialTurns { get; set; }
         public List<GameSessionTurnDataDTO> Turns { get; set; }
@@ -29,6 +30,7 @@ namespace ServerClientShare.DTO
         public GameSessionsPersistenceDataDTO()
         {
             PlayerIds = new List<string>();
+            Players = new List<PlayerMetaDataDTO>();
             InitialTurns = new List<GameSessionTurnDataDTO>();
             Turns = new List<GameSessionTurnDataDTO>();
         }
@@ -76,6 +78,16 @@ namespace ServerClientShare.DTO
             }
             dbObject.Set("Turns", turnsDB);
 
+            DatabaseArray playersDB = new DatabaseArray();
+            if (Players != null)
+            {
+                foreach (var player in Players)
+                {
+                    playersDB.Add(player.ToDBObject());
+                }
+            }
+            dbObject.Set("Players", playersDB);
+
             return dbObject;
         }
 
@@ -109,6 +121,12 @@ namespace ServerClientShare.DTO
                 dto.Turns.Add(GameSessionTurnDataDTO.FromDBObject((DatabaseObject)turnsDB.GetObject(i)));
             }
 
+            var playersDB = dbObject.GetArray("Players");
+            for (int i = 0; i < playersDB.Count; i++)
+            {
+                dto.Players.Add(PlayerMetaDataDTO.FromDBObject((DatabaseObject)playersDB.GetObject(i)));
+            }
+
             return dto;
         }
     }
@@ -140,6 +158,12 @@ namespace ServerClientShare.DTO
             foreach (object turn in turnsDB)
             {
                 dto.Turns.Add(GameSessionTurnDataDTO.FromDBObject((DatabaseObject)turn));
+            }
+
+            var playersDB = dbObject.GetArray("Players");
+            for (int i = 0; i < playersDB.Count; i++)
+            {
+                dto.Players.Add(PlayerMetaDataDTO.FromDBObject((DatabaseObject)playersDB.GetObject(i)));
             }
 
             return dto;

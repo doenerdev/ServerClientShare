@@ -27,6 +27,7 @@ namespace ServerClientShare.DTO
         public LeaderDTO Leader { get; set; }
         public List<TowerResourceDTO> Resources { get; set; }
         public DeckDTO Hand { get; set; }
+        public bool EndedGame { get; set; }
 
         public HexCellType CellType
         {
@@ -65,6 +66,7 @@ namespace ServerClientShare.DTO
             message = Tower.ToMessage(message);
             message = CurrentTowerSegment.ToMessage(message);
             message = Leader.ToMessage(message);
+            message.Add(EndedGame);
 
             message.Add(Resources.Count);
             foreach (var resource in Resources)
@@ -99,6 +101,7 @@ namespace ServerClientShare.DTO
             }
 
             dto.Hand = DeckDTO.FromMessageArguments(message, ref offset);
+            dto.EndedGame = message.GetBoolean(offset++);
 
             return dto;
         }
@@ -133,6 +136,7 @@ namespace ServerClientShare.DTO
             dbObject.Set("Resources", resourcesDB);
 
             dbObject.Set("Hand", Hand.ToDBObject());
+            dbObject.Set("EndedGame", EndedGame);
 
             return dbObject;
         }
@@ -160,6 +164,7 @@ namespace ServerClientShare.DTO
             }
 
             dto.Hand = DeckDTO.FromDBObject(dbObject.GetObject("Hand"));
+            dto.EndedGame = dbObject.GetBool("EndedGame");
 
             return dto;
         }

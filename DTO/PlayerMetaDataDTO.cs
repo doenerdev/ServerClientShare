@@ -21,6 +21,7 @@ namespace ServerClientShare.DTO
         public int PlayerIndex;
         public int Score;
         public bool IsOnline;
+        public bool EndedGame;
         public LeaderMetaDataDTO Leader;
 
         public override Message ToMessage(Message message)
@@ -35,6 +36,7 @@ namespace ServerClientShare.DTO
             dbObject.Set("PlayerIndex", PlayerIndex);
             dbObject.Set("Score", Score);
             dbObject.Set("IsOnline", IsOnline);
+            dbObject.Set("EndedGame", EndedGame);
             dbObject.Set("Leader", Leader.ToDBObject());
             return dbObject;
         }
@@ -46,6 +48,7 @@ namespace ServerClientShare.DTO
             dto.PlayerIndex = dbObject.GetInt("PlayerIndex");
             dto.Score = dbObject.GetInt("Score");
             dto.IsOnline = dbObject.GetBool("IsOnline");
+            dto.EndedGame = dbObject.GetBool("EndedGame");
             dto.Leader = LeaderMetaDataDTO.FromDBObject(dbObject.GetObject("Leader"));
             return dto;
         }
