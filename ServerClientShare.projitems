@@ -57,6 +57,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\PlayerActionsLog.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ClientPersistenceMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ClientSentActionMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ClientSentForfeitGameMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ClientSentUpdateActionLogIndexMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ClientSentUpdateDeckMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ClientSentUpdateHexMapMessage.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ServerPersistanceMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ServerSentActionMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\DatalessClientMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ServerSentForfeitGameMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DeckService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\HexCellService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\HexMapService.cs" />

@@ -22,6 +22,7 @@ namespace ServerClientShare.DTO
         public int LastActivityTimestamp { get; set; }
         public GameStartedState GameStartedState { get; set; }
         public string CurrentPlayerName { get; set; }
+        public string WinnerName { get; set; }
         public int TurnNumber { get; set; }
         public int RequiredRoomSize { get; set; }
         public List<PlayerMetaDataDTO> Players { get; set; }
@@ -44,6 +45,7 @@ namespace ServerClientShare.DTO
             dbObject.Set("LastActivityTimestamp", LastActivityTimestamp);
             dbObject.Set("GameStartedState", (int) GameStartedState);
             dbObject.Set("CurrentPlayerName", CurrentPlayerName);
+            dbObject.Set("WinnerName", WinnerName);
             dbObject.Set("TurnNumber", TurnNumber);
             dbObject.Set("RequiredRoomSize", RequiredRoomSize);
 
@@ -68,6 +70,7 @@ namespace ServerClientShare.DTO
             dto.LastActivityTimestamp = dbObject.GetInt("LastActivityTimestamp");
             dto.GameStartedState = (GameStartedState) dbObject.GetInt("GameStartedState");
             dto.CurrentPlayerName = dbObject.GetString("CurrentPlayerName");
+            dto.WinnerName = dbObject.GetString("WinnerName");
             dto.TurnNumber = dbObject.GetInt("TurnNumber");
             dto.RequiredRoomSize = dbObject.GetInt("RequiredRoomSize");
 
