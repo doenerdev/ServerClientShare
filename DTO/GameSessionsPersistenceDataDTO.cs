@@ -45,6 +45,7 @@ namespace ServerClientShare.DTO
             DatabaseObject dbObject = new DatabaseObject();
             dbObject.Set("GameId", GameId);
             dbObject.Set("CreatedTimestamp", CreatedTimestamp);
+            dbObject.Set("LastActivityTimestamp", LastActivityTimestamp);
 
             DatabaseArray playerIdsDB = new DatabaseArray();
             if (PlayerIds != null)
@@ -100,6 +101,7 @@ namespace ServerClientShare.DTO
             GameSessionsPersistenceDataDTO dto = new GameSessionsPersistenceDataDTO();
             dto.GameId = dbObject.GetString("GameId");
             dto.CreatedTimestamp = dbObject.GetInt("CreatedTimestamp");
+            dto.LastActivityTimestamp = dbObject.GetInt("LastActivityTimestamp");
 
             var playerIdsDB = dbObject.GetArray("PlayerIds");
             for (int i = 0; i < playerIdsDB.Count; i++)
@@ -139,6 +141,7 @@ namespace ServerClientShare.DTO
             GameSessionsPersistenceDataDTO dto = new GameSessionsPersistenceDataDTO();
             dto.GameId = dbObject.GetString("GameId");
             dto.CreatedTimestamp = dbObject.GetInt("CreatedTimestamp");
+            dto.LastActivityTimestamp = dbObject.GetInt("LastActivityTimestamp");
 
             var playerIdsDB = dbObject.GetArray("PlayerIds");
             for (int i = 0; i < playerIdsDB.Count; i++)
