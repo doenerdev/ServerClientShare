@@ -10,7 +10,6 @@ namespace ServerClientShare.Enums
         ServerGameIsInitializing,
         ServerGameInitialized,
 
-
         RequestHexMap,
         RequestDeck,
         RequestMarketplace,

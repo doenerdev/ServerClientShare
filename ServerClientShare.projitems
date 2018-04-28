@@ -57,6 +57,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\PlayerActionsLog.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ClientPersistenceMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ClientSentActionMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ClientConfirmedServerMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ClientSentEndedGameMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ClientSentForfeitGameMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ClientSentInitializedGameMessage.cs" />
@@ -70,9 +71,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ClientSentWonGameMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ServerConfirmedClientMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ServerPersistanceMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ServerSentActionLogMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ServerSentActionMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\DatalessClientMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ServerSentChangeTurnMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ServerSentDeckMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ServerSentForfeitGameMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ServerSentHexMapMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ServerSentInitialGameplayDataMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ServerSentMarketplaceMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ServerSentNewTowerSegmentMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ServerSentPlayerJoinedGameMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PeristenceMessages\ServerSentPlayerLeftGameMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DeckService.cs" />
