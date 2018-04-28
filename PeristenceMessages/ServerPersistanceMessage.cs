@@ -14,6 +14,12 @@ namespace ServerClientShare.PeristenceMessages
     public abstract class ServerPersistanceMessage<T> : IServerPersistenceMessage
     {
         public NetworkMessageType MessageType { get; protected set; }
+        public string Id { get; protected set; }
+
+        protected ServerPersistanceMessage()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
 
         public abstract Message ToMessage();
 

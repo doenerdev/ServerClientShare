@@ -43,5 +43,6 @@ namespace ServerClientShare.Enums
         ClientSentWonGame,
         ClientSentForfeitGame,
         ClientSentEndedGame,
+        ClientSentConfirmedServerMessage,
     }
 }
