@@ -17,7 +17,7 @@ namespace ServerClientShare.PeristenceMessages
         public ClientConfirmedServerMessage(string approvedMessageId)
         {
             ApprovedMessageId = approvedMessageId;
-            MessageType = NetworkMessageType.ClientSentConfirmedServerMessage;
+            MessageType = NetworkMessageType.ClientSentConfirmedServerMessage; 
         }
 
         public override Message ToMessage()
