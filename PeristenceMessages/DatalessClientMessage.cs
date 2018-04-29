@@ -20,14 +20,16 @@ namespace ServerClientShare.PeristenceMessages
         public override Message ToMessage()
         {
             var message = Message.Create(MessageType.ToString("G"));
+            message.Add(Id);
             message.Add((int) MessageType);
             return message;
         }
 
         public new static DatalessClientMessage FromMessageArguments(Message message, ref uint offset)
         {
+            var id = message.GetString(offset++);
             var type = (NetworkMessageType) message.GetInt(offset++);
-            return new DatalessClientMessage(type);
+            return new DatalessClientMessage(type) { Id = id};
         }
     }
 }
