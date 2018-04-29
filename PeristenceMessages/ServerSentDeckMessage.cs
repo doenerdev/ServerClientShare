@@ -26,6 +26,7 @@ namespace ServerClientShare.PeristenceMessages
         public override Message ToMessage()
         {
             var message = Message.Create(MessageType.ToString("G"));
+            message.Add(Id);
             message.Add(PlayerName);
             message = Deck.ToMessage(message);
             return message;
@@ -33,9 +34,10 @@ namespace ServerClientShare.PeristenceMessages
 
         public new static ServerSentDeckMessage FromMessageArguments(Message message, ref uint offset)
         {
+            var id = message.GetString(offset++);
             var playerName = message.GetString(offset++);
             var deck = DeckDTO.FromMessageArguments(message, ref offset);
-            var dto = new ServerSentDeckMessage(playerName, deck);
+            var dto = new ServerSentDeckMessage(playerName, deck) { Id = id};
             return dto;
         }
     }

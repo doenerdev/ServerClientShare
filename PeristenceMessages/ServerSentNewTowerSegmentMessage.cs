@@ -26,6 +26,7 @@ namespace ServerClientShare.PeristenceMessages
         public override Message ToMessage()
         {
             var message = Message.Create(MessageType.ToString("G"));
+            message.Add(Id);
             message.Add(PlayerName);
             message = TowerSegment.ToMessage(message);
             return message;
@@ -33,9 +34,10 @@ namespace ServerClientShare.PeristenceMessages
 
         public new static ServerSentNewTowerSegmentMessage FromMessageArguments(Message message, ref uint offset)
         {
+            var id = message.GetString(offset++);
             var playerName = message.GetString(offset++);
             var towerSegment = TowerSegmentDTO.FromMessageArguments(message, ref offset);
-            var dto = new ServerSentNewTowerSegmentMessage(playerName, towerSegment);
+            var dto = new ServerSentNewTowerSegmentMessage(playerName, towerSegment) { Id = id};
             return dto;
         }
     }

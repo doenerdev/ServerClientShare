@@ -23,14 +23,16 @@ namespace ServerClientShare.PeristenceMessages
         public override Message ToMessage()
         {
             var message = Message.Create(MessageType.ToString("G"));
+            message.Add(Id);
             message.Add(ApprovedMessageId);
             return message;
         }
 
         public new static ClientConfirmedServerMessage FromMessageArguments(Message message, ref uint offset)
         {
+            var id = message.GetString(offset++);
             var approvedMessageId = message.GetString(offset++);
-            var dto = new ClientConfirmedServerMessage(approvedMessageId) { };
+            var dto = new ClientConfirmedServerMessage(approvedMessageId) { Id = id };
             return dto;
         }
     }

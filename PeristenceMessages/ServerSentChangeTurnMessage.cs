@@ -24,14 +24,16 @@ namespace ServerClientShare.PeristenceMessages
         public override Message ToMessage()
         {
             var message = Message.Create(MessageType.ToString("G"));
+            message.Add(Id);
             message.Add(PlayerName);
             return message;
         }
 
         public new static ServerSentChangeTurnMessage FromMessageArguments(Message message, ref uint offset)
         {
+            var id = message.GetString(offset++);
             var playerName = message.GetString(offset++);
-            var dto = new ServerSentChangeTurnMessage(playerName);
+            var dto = new ServerSentChangeTurnMessage(playerName) { Id = id};
             return dto;
         }
     }

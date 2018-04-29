@@ -27,6 +27,7 @@ namespace ServerClientShare.PeristenceMessages
         public override Message ToMessage()
         {
             var message = Message.Create(MessageType.ToString("G"));
+            message.Add(Id);
             message.Add(ActionName);
             message.Add(PlayerName);
             message.Add(ActionJson);
@@ -35,10 +36,11 @@ namespace ServerClientShare.PeristenceMessages
 
         public new static ServerSentActionMessage FromMessageArguments(Message message, ref uint offset)
         {
+            var id = message.GetString(offset++);
             var actionName = message.GetString(offset++);
             var playerName = message.GetString(offset++);
             var actionJson = message.GetString(offset++);
-            var dto = new ServerSentActionMessage(actionName, playerName, actionJson);
+            var dto = new ServerSentActionMessage(actionName, playerName, actionJson) { Id = id};
             return dto;
         }
     }

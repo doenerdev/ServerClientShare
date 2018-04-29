@@ -26,6 +26,7 @@ namespace ServerClientShare.PeristenceMessages
         public override Message ToMessage()
         {
             var message = Message.Create(MessageType.ToString("G"));
+            message.Add(Id);
             message.Add(PlayerName);
             message = HexMap.ToMessage(message);
             return message;
@@ -33,9 +34,10 @@ namespace ServerClientShare.PeristenceMessages
 
         public new static ServerSentHexMapMessage FromMessageArguments(Message message, ref uint offset)
         {
+            var id = message.GetString(offset++);
             var playerName = message.GetString(offset++);
             var hexMap = HexMapDTO.FromMessageArguments(message, ref offset);
-            var dto = new ServerSentHexMapMessage(playerName, hexMap);
+            var dto = new ServerSentHexMapMessage(playerName, hexMap) { Id = id};
             return dto;
         }
     }
