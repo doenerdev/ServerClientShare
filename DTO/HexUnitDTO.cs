@@ -22,13 +22,17 @@ namespace ServerClientShare.DTO
         public HexCoordinatesDTO Coordinates { get; set; }
         public HexUnitType Type { get; set; }
         public int Stamina { get; set; }
+        public int MaxStamina { get; set; }
+        public string Id { get; set; }
 
         public override Message ToMessage(Message message)
         {
             message.Add(PlayerId);
             message.Add((int) Type);
             message.Add(Stamina);
+            message.Add(MaxStamina);
             message = Coordinates.ToMessage(message);
+            message.Add(Id);
             return message;
         }
 
@@ -38,7 +42,9 @@ namespace ServerClientShare.DTO
             dto.PlayerId = message.GetInt(offset++);
             dto.Type = (HexUnitType) message.GetInt(offset++);
             dto.Stamina = message.GetInt(offset++);
+            dto.MaxStamina = message.GetInt(offset++);
             dto.Coordinates = HexCoordinatesDTO.FromMessageArguments(message, ref offset);
+            dto.Id = message.GetString(offset++);
             return dto;
         }
 
@@ -49,6 +55,8 @@ namespace ServerClientShare.DTO
             dbObject.Set("Coordinates", Coordinates.ToDBObject());
             dbObject.Set("Type", (int) Type);
             dbObject.Set("Stamina", Stamina);
+            dbObject.Set("MaxStamina", MaxStamina);
+            dbObject.Set("Id", Id);
 
             return dbObject;
         }
@@ -62,6 +70,8 @@ namespace ServerClientShare.DTO
             dto.Coordinates = HexCoordinatesDTO.FromDBObject(dbObject.GetObject("Coordinates"));
             dto.Type = (HexUnitType) dbObject.GetInt("Type");
             dto.Stamina = dbObject.GetInt("Stamina");
+            dto.MaxStamina = dbObject.GetInt("MaxStamina");
+            dto.Id = dbObject.GetString("Id");
 
             return dto;
         }
