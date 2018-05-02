@@ -16,14 +16,17 @@ using ServerClientShare.Models;
 public class PlayerActionsLogDTO : DatabaseDTO<PlayerActionsLogDTO>
 {
     public List<PlayerAction> PlayerActions { get; set; }
+    public string PlayerName { get; set; }
 
-    public PlayerActionsLogDTO()
+    public PlayerActionsLogDTO(string playerName)
     {
         PlayerActions = new List<PlayerAction>();
+        PlayerName = playerName;
     }
 
     public override Message ToMessage(Message message)
     {
+        message.Add(PlayerName);
         message.Add(PlayerActions.Count);
 
         foreach (var playerAction in PlayerActions)
@@ -36,7 +39,8 @@ public class PlayerActionsLogDTO : DatabaseDTO<PlayerActionsLogDTO>
 
     public static PlayerActionsLogDTO FromMessageArguments(Message message, ref uint offset)
     {
-        var dto = new PlayerActionsLogDTO();
+        var playerName = message.GetString(offset++);
+        var dto = new PlayerActionsLogDTO(playerName);
         var actionsCount = message.GetInt(offset++);
 
         for (int i = 0; i < actionsCount; i++)
@@ -49,6 +53,7 @@ public class PlayerActionsLogDTO : DatabaseDTO<PlayerActionsLogDTO>
     public override DatabaseObject ToDBObject()
     {
         DatabaseObject dbObject = new DatabaseObject();
+        dbObject.Set("PlayerName", PlayerName);
 
         DatabaseArray actionsDB = new DatabaseArray();
         if (PlayerActions != null)
@@ -67,7 +72,8 @@ public class PlayerActionsLogDTO : DatabaseDTO<PlayerActionsLogDTO>
     {
         if (dbObject.Count == 0) return null;
 
-        var dto = new PlayerActionsLogDTO();
+        var playerName = dbObject.GetString("PlayerName");
+        var dto = new PlayerActionsLogDTO(playerName);
         var actionsDB = dbObject.GetArray("PlayerActions");
         for (int i = 0; i < actionsDB.Count; i++)
         {
