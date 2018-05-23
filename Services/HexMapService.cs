@@ -10,36 +10,49 @@ using PlayerIO.GameLibrary;
 #endif
 using ServerClientShare.DTO;
 using ServerClientShare.Enums;
+using ServerClientShare.Helper;
 
 namespace ServerClientShare.Services
 {
     public class HexMapService
     {
+        private ServerClientShare.Helper.RandomGenerator _rndGenerator;
         private HexCellService _hexCellService;
         private HexMapDTO _currentHexMapDto;
         private Dictionary<int, List<int>> _playerZoneIndexes;
         private int _playerCount;
         private int _playerZoneRadius = 2;
         private List<int> _resourceZoneIndexes;
+        private List<HexCellType> _resourceZoneResourceTypes = new List<HexCellType>()
+        {
+            HexCellType.Forest,
+            HexCellType.Forest,
+            HexCellType.Forest,
+            HexCellType.Forest,
+            HexCellType.Mountains,
+            HexCellType.Mountains,
+            HexCellType.Mountains,
+            HexCellType.Desert,
+            HexCellType.Desert,
+        };
 
         public HexMapDTO CurrentHexMapDto => _currentHexMapDto;
 
-        public HexMapService(HexCellService hexCellService, int playerCount)
+        public HexMapService(HexCellService hexCellService, int playerCount, RandomGenerator rndGenerator)
         {
             _playerCount = playerCount;
             _hexCellService = hexCellService;
             _playerZoneIndexes = new Dictionary<int, List<int>>();
             _resourceZoneIndexes = new List<int>();
+            _rndGenerator = rndGenerator;
         }
 
-        public HexMapService(DatabaseObject dbObject, HexCellService hexCellService, int playerCount) : this(hexCellService, playerCount)
+        public HexMapService(DatabaseObject dbObject, HexCellService hexCellService, int playerCount, RandomGenerator rndGenerator) : this(hexCellService, playerCount, rndGenerator)
         {
             _currentHexMapDto = HexMapDTO.FromDBObject(dbObject.GetObject("HexMap"));
-            Console.WriteLine("Initialized From DB Object");
-            Console.WriteLine(_currentHexMapDto.Cells.Count);
         }
 
-        public HexMapService(HexMapDTO mapDto, HexCellService hexCellService, int playerCount) : this(hexCellService, playerCount)
+        public HexMapService(HexMapDTO mapDto, HexCellService hexCellService, int playerCount, RandomGenerator rndGenerator) : this(hexCellService, playerCount, rndGenerator)
         {
             _currentHexMapDto = mapDto;
         }
@@ -112,12 +125,37 @@ namespace ServerClientShare.Services
 
                         if (p == _playerCount - 1)
                         {
-                            cells.Add(_hexCellService.CreateHexCell(
-                                x: x,
-                                z: z,
-                                i: i,
-                                hasResource: _resourceZoneIndexes.Contains(i))
-                            );
+                            if (_resourceZoneIndexes.Contains(i)) //has resource
+                            {
+                                var index = _rndGenerator.RandomRange(0, _resourceZoneResourceTypes.Count);
+                                var cellType = HexCellType.Desert;
+                                if (index >= 0 && index < _resourceZoneResourceTypes.Count)
+                                {
+                                    cellType = _resourceZoneResourceTypes[index];
+                                    _resourceZoneResourceTypes.RemoveAt(index);
+                                }
+                                else
+                                {
+                                    UnityEngine.Debug.LogError(index);
+                                }
+                           
+                                cells.Add(_hexCellService.CreateHexCell(
+                                    x: x,
+                                    z: z,
+                                    i: i,
+                                    cellType: cellType,
+                                    hasResource:true)
+                                );
+                            }
+                            else //has noe resources
+                            {
+                                cells.Add(_hexCellService.CreateHexCell(
+                                    x: x,
+                                    z: z,
+                                    i: i,
+                                    hasResource: _resourceZoneIndexes.Contains(i))
+                                );
+                            }
                         }
 
                     }

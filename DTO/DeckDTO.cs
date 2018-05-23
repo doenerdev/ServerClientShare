@@ -14,16 +14,19 @@ namespace ServerClientShare.DTO
     [Serializable]
     public class DeckDTO : DatabaseDTO<DeckDTO>
     {
+        public int ShuffleIndex { get; set; }
         public int DeckSize { get; set; }
         public List<CardDTO> Cards { get; set; }
 
         public DeckDTO()
         {
+            ShuffleIndex = 0;
             Cards = new List<CardDTO>();
         }
 
         public override Message ToMessage(Message message)
         {
+            message.Add(ShuffleIndex);
             message.Add(DeckSize);
 
             foreach (var card in Cards)
@@ -37,6 +40,7 @@ namespace ServerClientShare.DTO
         public new static DeckDTO FromMessageArguments(Message message, ref uint offset)
         {
             DeckDTO dto = new DeckDTO();
+            dto.ShuffleIndex = message.GetInt(offset++);
             dto.DeckSize = message.GetInt(offset++);
 
             for(int i = 0; i < dto.DeckSize; i++) { 
@@ -49,6 +53,7 @@ namespace ServerClientShare.DTO
         public override DatabaseObject ToDBObject()
         {
             DatabaseObject dbObject = new DatabaseObject();
+            dbObject.Set("ShuffleIndex", ShuffleIndex);
             dbObject.Set("DeckSize", DeckSize);
 
             DatabaseArray cardsDB = new DatabaseArray();
@@ -70,6 +75,7 @@ namespace ServerClientShare.DTO
 
             DeckDTO dto = new DeckDTO();
 
+            dto.ShuffleIndex = dbObject.GetInt("ShuffleIndex");
             dto.DeckSize = dbObject.GetInt("DeckSize");
             var cardsDB = dbObject.GetArray("Cards");
 

@@ -76,9 +76,9 @@ namespace ServerClientShare.Services
                     {
                         RequiredResources = new List<TowerResourceDTO>()
                         {
+                            new TowerResourceDTO(ResourceType.Wood),
                             new TowerResourceDTO(ResourceType.Stone),
                             new TowerResourceDTO(ResourceType.Stone),
-                            new TowerResourceDTO(ResourceType.Sand),
                         },
                         VisualStyle = TowerSegmentVisualStyle.Variant1,
                     },

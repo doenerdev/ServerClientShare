@@ -16,13 +16,27 @@ namespace ServerClientShare.Services
 {
     public class DeckService
     {
-        public const int DeckSize = 30;
+        public const int QtyBuilderCards = 9;
+        public const int QtyFighterCards = 5;
+        public const int QtyMovement1Cards = 5;
+        public const int QtyMovement2Cards = 3;
+        public const int QtyMovement3Cards = 3;
+        public const int QtyGiftCards = 4;
         public const int MarketplaceSize = 4;
+        public const int QtyDeckStacks = 5;
 
         private DeckDTO _deck;
         private DeckDTO _marketplace;
         private ServerClientShare.Helper.RandomGenerator _rndGenerator;
 
+        public int DeckSize
+        {
+            get
+            {
+                return QtyBuilderCards + QtyFighterCards + QtyMovement1Cards
+                       + QtyMovement2Cards + QtyMovement3Cards + QtyGiftCards;
+            }
+        }
         public DeckDTO Deck
         {
             get
@@ -30,7 +44,7 @@ namespace ServerClientShare.Services
                 if (_deck == null)
                 {
                     Console.WriteLine("Generate Marketplace");
-                    _deck = GenerateDeck(DeckSize);
+                    _deck = GenerateDeck();
                 }
                 return _deck;
             }
@@ -43,7 +57,18 @@ namespace ServerClientShare.Services
                 if (_marketplace == null)
                 {
                     Console.WriteLine("Generate Marketplace");
-                    _marketplace = GenerateDeck(MarketplaceSize);
+                    if (_deck == null)
+                        _deck = GenerateDeck();
+
+                    _marketplace = new DeckDTO() { DeckSize = MarketplaceSize};
+                    for (int i = 0; i < MarketplaceSize; i++)
+                    {
+                        _marketplace.Cards.Add(_deck.Cards[i]);
+                    }
+                    for (int i = 0; i < MarketplaceSize; i++)
+                    {
+                        _deck.Cards.RemoveAt(i);
+                    }
                 }
                 return _marketplace;
             }
@@ -66,46 +91,60 @@ namespace ServerClientShare.Services
             _marketplace = marketplaceDto;
         }
 
-        private DeckDTO GenerateDeck(int size)
+        private DeckDTO GenerateDeck()
         {
             var dto = new DeckDTO();
-            dto.DeckSize = size;
 
-            for (int i = 0; i < dto.DeckSize; i++)
+            List<CardDTO> deckCards = new List<CardDTO>();
+            for (int j = 0; j < QtyDeckStacks; j++)
             {
-                CardType cardType = CardType.CreateBuilder;
-                var rnd = _rndGenerator.RandomRange(0D, 1D);
-                if (rnd > 0.75D)
-                {
-                    cardType = CardType.CreateBuilder;
-                }
-                else if (rnd > 0.4D)
-                {
-                    cardType = CardType.CreateFighter;
-                }
-                else if (rnd > 0.28D)
-                {
-                    cardType = CardType.Gift;
-                }
-                else
-                {
-                    if (rnd > 0.2D)
-                    {
-                        cardType = CardType.Movement3;
-                    }
-                    else if (rnd > 0.1D)
-                    {
-                        cardType = CardType.Movement2;
-                    }
-                    else
-                    {
-                        cardType = CardType.Movement1;
-                    }
-                }
-                dto.Cards.Add(new CardDTO() { CardType = cardType });
-            }
+                List<CardDTO> cards = new List<CardDTO>();
+                for (int i = 0; i < QtyFighterCards; i++)
+                    cards.Add(new CardDTO() { CardType = CardType.CreateFighter });
 
+                for (int i = 0; i < QtyBuilderCards; i++)
+                    cards.Add(new CardDTO() { CardType = CardType.CreateBuilder });
+
+                for (int i = 0; i < QtyMovement1Cards; i++)
+                    cards.Add(new CardDTO() { CardType = CardType.Movement1 });
+
+                for (int i = 0; i < QtyMovement2Cards; i++)
+                    cards.Add(new CardDTO() { CardType = CardType.Movement2 });
+
+                for (int i = 0; i < QtyMovement3Cards; i++)
+                    cards.Add(new CardDTO() { CardType = CardType.Movement3 });
+
+                for (int i = 0; i < QtyGiftCards; i++)
+                    cards.Add(new CardDTO() { CardType = CardType.Gift });
+
+                Shuffle(cards);
+                deckCards.AddRange(cards);
+            }
+            dto.Cards = deckCards;
+            dto.DeckSize = deckCards.Count;
+           
             return dto;
+        }
+
+        public DeckDTO Shuffle(DeckDTO dto)
+        {
+            dto.Cards = Shuffle(dto.Cards);
+            return dto;
+        }
+
+        public List<CardDTO> Shuffle(List<CardDTO> cards)
+        {
+            //https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+            //using Fisher-Yates Shuffle
+
+            for (int i = cards.Count - 1; i > 0; i--)
+            {
+                var rnd = _rndGenerator.RandomRange(0, cards.Count);
+                var buffer = cards[rnd];
+                cards[rnd] = cards[i];
+                cards[i] = buffer;
+            }
+            return cards;
         }
 
         public void UpdateMarketplace(DeckDTO dto)
@@ -117,5 +156,6 @@ namespace ServerClientShare.Services
         {
             _deck = dto;
         }
+
     }
 }
