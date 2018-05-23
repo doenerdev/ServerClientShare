@@ -134,10 +134,6 @@ namespace ServerClientShare.Services
                                     cellType = _resourceZoneResourceTypes[index];
                                     _resourceZoneResourceTypes.RemoveAt(index);
                                 }
-                                else
-                                {
-                                    UnityEngine.Debug.LogError(index);
-                                }
                            
                                 cells.Add(_hexCellService.CreateHexCell(
                                     x: x,
