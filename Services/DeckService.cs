@@ -69,6 +69,7 @@ namespace ServerClientShare.Services
                     {
                         _deck.Cards.RemoveAt(i);
                     }
+                    _deck.DeckSize -= MarketplaceSize;
                 }
                 return _marketplace;
             }
