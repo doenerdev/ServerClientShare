@@ -19,9 +19,8 @@ namespace ServerClientShare.Services
         public const int QtyBuilderCards = 9;
         public const int QtyFighterCards = 5;
         public const int QtyMovement1Cards = 5;
-        public const int QtyMovement2Cards = 3;
         public const int QtyMovement3Cards = 3;
-        public const int QtyGiftCards = 4;
+        public const int QtyGiftCards = 3;
         public const int MarketplaceSize = 4;
         public const int QtyDeckStacks = 5;
 
@@ -34,7 +33,7 @@ namespace ServerClientShare.Services
             get
             {
                 return QtyBuilderCards + QtyFighterCards + QtyMovement1Cards
-                       + QtyMovement2Cards + QtyMovement3Cards + QtyGiftCards;
+                       +  QtyMovement3Cards + QtyGiftCards;
             }
         }
         public DeckDTO Deck
@@ -108,9 +107,6 @@ namespace ServerClientShare.Services
 
                 for (int i = 0; i < QtyMovement1Cards; i++)
                     cards.Add(new CardDTO() { CardType = CardType.Movement1 });
-
-                for (int i = 0; i < QtyMovement2Cards; i++)
-                    cards.Add(new CardDTO() { CardType = CardType.Movement2 });
 
                 for (int i = 0; i < QtyMovement3Cards; i++)
                     cards.Add(new CardDTO() { CardType = CardType.Movement3 });
